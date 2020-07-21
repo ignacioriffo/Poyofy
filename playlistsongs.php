@@ -1,13 +1,12 @@
 <?php
+session_start();
 
+if(!isset($_SESSION['user'])){
+  header('Location: login.php');
+}
 include_once 'user.php';
-include_once 'user_session.php';
-
-$userSession = new UserSession();
 $user = new User();
-/**/
-$username = $userSession->getCurrentUser();
-$user->setUser($userSession->getCurrentUser());
+$user->setUser($_SESSION['user']);
 $user->isArtista($user->getId());
 
 if($user->getIsArtista()){
@@ -20,6 +19,6 @@ if($user->getIsArtista()){
     <title>Document</title>
 </head>
 <body>
-    <
+    <l4>Proximamente <?php echo $user->getNombre(); ?>! </l4>
 </body>
 </html>

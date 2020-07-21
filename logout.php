@@ -1,8 +1,12 @@
 <?php
-	include_once 'user_session.php';
+	session_start();
 
-	$userSession = new userSession();
-	$userSession->closeSession();
+	if(!isset($_SESSION['user'])){
+	  header('Location: login.php');
+	}
+
+	session_unset();
+	session_destroy();
 	
 	header("location: index.php");
 	exit();
