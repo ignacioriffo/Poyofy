@@ -18,6 +18,10 @@ class playlist extends DB{
 			$this->descripcion = $currentUser['descripcion'];
 		}
 	}
+	
+	public function getNombre(){
+		return $this->nombre;
+	}
 }
 
 ?>

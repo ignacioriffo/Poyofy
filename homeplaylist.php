@@ -26,5 +26,11 @@ if($user->getIsArtista()){
 	<li class="volver">
 		<a href="index.php">Volver</a>
 	</li>
+	<br><br>
+	<?php
+		$user->setPlaylistsSeguidas($user->getId());
+		$user->getPlaylistsSeguidas();
+	?>
+
 </body>
 </html>

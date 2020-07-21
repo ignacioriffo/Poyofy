@@ -1,6 +1,7 @@
 <?php
 
 include_once 'conexion2.php';
+include_once 'playlist.php';
 
 
 class User extends DB{
@@ -9,6 +10,24 @@ class User extends DB{
 	private $username;
 	private $isartista;
 	private $biografia;
+	private $playlists;
+
+	public function setPlaylistsSeguidas(){
+		$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		
+		foreach($query as $currentId){
+			$playlist = new playlist();
+			$playlist->setPlaylist($currentId['id_playlist']);
+			array_push($this->playlists,$playlist);
+		}
+	}
+
+	public function getPlaylistsSeguidas(){
+		foreach($this->playlists as $Playlist){
+			echo $Playlist->getNombre() . "<br />";
+		}
+	}
 
 	public function setBiografia($id){
 		$query = $this->connect()->prepare('SELECT biografia FROM artistas WHERE id_user = :id');
@@ -53,6 +72,7 @@ class User extends DB{
 		foreach ($query as $currentUser) {
 			$this->id_user = $currentUser['id_user'];
 			$this->username = $currentUser['username'];
+			$this->playlists = array();
 		}
 	}
 
