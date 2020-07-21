@@ -7,6 +7,9 @@ if(!isset($_SESSION))
 { 
     session_start(); 
 }
+$userSession = new UserSession();
+$user = new User();
+/**/
 $username = $userSession->getCurrentUser();
 $user->setUser($userSession->getCurrentUser());
 $user->isArtista($user->getId());
