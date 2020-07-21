@@ -1,5 +1,6 @@
 <!doctype html>
 <?php
+	include_once 'index.php';
 	include_once 'conexion2.php';
 ?>
 <!DOCTYPE html>

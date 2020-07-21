@@ -3,16 +3,8 @@
 include_once 'user.php';
 include_once 'user_session.php';
 
-//$userSession = new UserSession();
 session_start();
 $user = new User();
-/*
-$isartista = $userTemp->isArtista($userForm, $passForm);
-if($isartista){
-	$user = new Artista;
-}else{
-	$user = new User;
-}*/
 
 if(isset($_SESSION['user'])){
 	#$username = $userSession->getCurrentUser();
@@ -22,7 +14,7 @@ if(isset($_SESSION['user'])){
 	if($user->getIsArtista()){
 		$user->setBiografia($user->getId());
 	}
-	include_once 'home.php';
+	header("location: home.php");
 }else if (isset($_POST['username']) && isset($_POST['password'])) {
 	$userForm = $_POST['username'];
 	$passForm = $_POST['password'];
@@ -37,7 +29,7 @@ if(isset($_SESSION['user'])){
 		if($user->getIsArtista()){
 			$user->setBiografia($user->getId());
 		}
-		include_once 'home.php';
+		header("location: home.php");
 	}else{
 		$errorLogin = "nombre de usuario y/o contraseña incorrecta";
 		include_once 'login.php';
