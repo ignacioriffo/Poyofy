@@ -3,10 +3,6 @@
 include_once 'user.php';
 include_once 'user_session.php';
 
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-}
 $userSession = new UserSession();
 $user = new User();
 /**/
@@ -25,7 +21,7 @@ if($user->getIsArtista()){
 </head>
 <body>
 	<h1>Playlists</h1>
-	
+	<l4>Playlists de  <?php echo $user->getNombre(); ?>! </l4>
 
 	<li class="volver">
 		<a href="index.php">Volver</a>
