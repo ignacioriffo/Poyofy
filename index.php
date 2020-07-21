@@ -3,7 +3,8 @@
 include_once 'user.php';
 include_once 'user_session.php';
 
-$userSession = new UserSession();
+//$userSession = new UserSession();
+session_start();
 $user = new User();
 /*
 $isartista = $userTemp->isArtista($userForm, $passForm);
@@ -14,8 +15,8 @@ if($isartista){
 }*/
 
 if(isset($_SESSION['user'])){
-	$username = $userSession->getCurrentUser();
-	$user->setUser($userSession->getCurrentUser());
+	#$username = $userSession->getCurrentUser();
+	#$user->setUser($userSession->getCurrentUser());
 	$user->isArtista($user->getId());
 
 	if($user->getIsArtista()){
@@ -27,7 +28,8 @@ if(isset($_SESSION['user'])){
 	$passForm = $_POST['password'];
 
 	if($user->userExists($userForm, $passForm)){
-		$userSession->setCurrentUser($userForm);
+		//$userSession->setCurrentUser($userForm);
+		$_SESSION['user'] = $userForm;
 
 		$user->setUser($userForm);
 		$user->isArtista($user->getId());

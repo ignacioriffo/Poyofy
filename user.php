@@ -23,6 +23,10 @@ class User extends DB{
 		}
 	}
 
+	public function getPlaylists(){
+		return $this->playlists;
+	}
+
 	public function getPlaylistsSeguidas(){
 		foreach($this->playlists as $Playlist){
 			echo $Playlist->getNombre() . "<br />";

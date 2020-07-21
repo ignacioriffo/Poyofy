@@ -29,7 +29,12 @@ if($user->getIsArtista()){
 	<br><br>
 	<?php
 		$user->setPlaylistsSeguidas($user->getId());
-		$user->getPlaylistsSeguidas();
+		$playlists = $user->getPlaylists();
+		foreach($playlists as $playlist){
+			$playlistname = $playlist->getNombre();
+			echo "<li class='playlist'><a href='playlistsongs.php'>" . $playlistname . "</a></li>";
+		}
+	
 	?>
 
 </body>
