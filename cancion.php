@@ -8,8 +8,8 @@ class Cancion extends DB {
     private $duracion;
     private $fecha;
 
-	public function setCancnion($id_cancion){
-		$query = $this->connect()->prepare('SELECT * FROM playlists WHERE id_cancion = :id');
+	public function setCancion($id_cancion){
+		$query = $this->connect()->prepare('SELECT * FROM canciones WHERE id_cancion = :id');
 		$query->execute(['id' => $id_cancion]);
 
 		foreach ($query as $currentCancion){
@@ -21,7 +21,36 @@ class Cancion extends DB {
             $this->duracion = $currentCancion['duracion'];
             $this->fecha = $currentCancion['fecha'];
 		}
-	}
+    }
+    
+    public function getId(){
+		return $this->seguidores;
+    }
+    
+    public function getUser(){
+		return $this->id_user;
+    }
+    
+    public function getAlbum(){
+		return $this->id_album;
+    }
+    
+    public function getNombre(){
+		return $this->nombre;
+    }
+    
+    public function getGenero(){
+		return $this->genero;
+    }
+
+    public function getDuracion(){
+		return $this->duracion;
+    }
+
+    public function getFecha(){
+		return $this->fecha;
+    }
+    
 
 }
 

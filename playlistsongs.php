@@ -22,6 +22,8 @@ if(isset($_POST['playlist'])){
     $playlist = $user->getCurrPlaylist();
 }
 
+$canciones = $playlist->getCanciones();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,12 +32,18 @@ if(isset($_POST['playlist'])){
 </head>
 <body>
     <h1><?php echo $playlist->getNombre(); ?></h1>
+    <p1><?php echo $playlist->getDescripcion() . "<br>"; ?></h1>
+    <p1>Creada por: <?php echo $playlist->getCreador() . "<br>"; ?></h1>
     <p4 class="seguidores"><a href="playlistseguidores.php">Seguidores</a></p4>
     <p4>: <?php echo $playlist->getNseguidores();?></p4>
     <li class="volver">
 		<a href="homeplaylist.php">Volver</a>
 	</li>
     <br><br>
-    <p4 class="seguidores"><a href="playlistseguidores.php">Seguidores</a></p4>
+    <p4 class="canciones"><a href="homecancion.php"><?php
+    foreach ($canciones as $cancion){
+        echo $cancion->getNombre() . "<br>";
+    }
+    ?></a></p4>
 </body>
 </html>
