@@ -17,7 +17,7 @@ class User extends DB{
 		$query->execute(['id' => $this->id_user]);
 		
 		foreach($query as $currentId){
-			$playlist = new playlist();
+			$playlist = new Playlist();
 			$playlist->setPlaylist($currentId['id_playlist']);
 			array_push($this->playlists,$playlist);
 		}

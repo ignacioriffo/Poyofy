@@ -12,6 +12,9 @@ $user->isArtista($user->getId());
 if($user->getIsArtista()){
 	$user->setBiografia($user->getId());
 }
+
+$user->setPlaylistsSeguidas($user->getId());
+$playlists = $user->getPlaylists();
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,12 +30,14 @@ if($user->getIsArtista()){
 	</li>
 	<br><br>
 	<?php
-		$user->setPlaylistsSeguidas($user->getId());
-		$playlists = $user->getPlaylists();
+
+		echo "<form action='playlistsongs.php' method='post'>";
 		foreach($playlists as $playlist){
 			$playlistname = $playlist->getNombre();
-			echo "<li class='playlist'><a href='playlistsongs.php'>" . $playlistname . "</a></li>";
+			$playlistid = $playlist->getId();
+			echo "<button type='submit' name='playlist' value='" . $playlistid . "'>" . $playlistname . "</button>";
 		}
+		echo "</form>";
 	
 	?>
 

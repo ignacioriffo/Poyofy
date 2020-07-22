@@ -1,7 +1,7 @@
 <?php
 include_once 'conexion2.php';
 
-class playlist extends DB{
+class Playlist extends DB{
 	private $id_playlist;
 	private $id_user;
 	private $nombre;
@@ -13,15 +13,25 @@ class playlist extends DB{
 		$query->execute(['id' => $id_playlist]);
 
 		foreach ($query as $currentUser){
+			$this->id_playlist = $currentUser['id_playlist'];
 			$this->id_user = $currentUser['id_user'];
 			$this->nombre = $currentUser['nombre'];
 			$this->descripcion = $currentUser['descripcion'];
 		}
 	}
+
+	public function getId(){
+		return $this->id_playlist;
+	}
 	
 	public function getNombre(){
 		return $this->nombre;
 	}
+
+	public function getDescripcion(){
+		return $this->descripcion;
+	}
+
 }
 
 ?>
