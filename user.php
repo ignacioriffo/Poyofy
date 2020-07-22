@@ -11,6 +11,15 @@ class User extends DB{
 	private $isartista;
 	private $biografia;
 	private $playlists;
+	private $currPlaylist;
+
+	public function setCurrPlaylist($playlist){
+		$this->currPlaylist = $playlist;
+	}
+
+	public function getCurrPlaylist($playlist){
+		return $this->currPlaylist;
+	}
 
 	public function setPlaylistsSeguidas(){
 		$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
@@ -72,6 +81,17 @@ class User extends DB{
 	public function setUser($user){
 		$query = $this->connect()->prepare('SELECT * FROM personas WHERE username = :user');
 		$query->execute(['user' => $user]);
+
+		foreach ($query as $currentUser) {
+			$this->id_user = $currentUser['id_user'];
+			$this->username = $currentUser['username'];
+			$this->playlists = array();
+		}
+	}
+
+	public function setUserId($id){
+		$query = $this->connect()->prepare('SELECT * FROM personas WHERE id_user = :id');
+		$query->execute(['id' => $id]);
 
 		foreach ($query as $currentUser) {
 			$this->id_user = $currentUser['id_user'];

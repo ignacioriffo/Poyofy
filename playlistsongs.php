@@ -15,12 +15,15 @@ if($user->getIsArtista()){
 	$user->setBiografia($user->getId());
 }
 
+$playlist = new Playlist();
 if(isset($_POST['playlist'])){
     $playlistid = $_POST['playlist'];
+    $playlist->setPlaylist($playlistid);
+    $playlist->setSeguidores();
+    $user->setCurrPlaylist($playlist);
+}else{
+    $playlist = $user->getCurrPlaylist();
 }
-
-$playlist = new Playlist();
-$playlist->setPlaylist($playlistid);
 
 ?>
 <!DOCTYPE html>
@@ -29,11 +32,12 @@ $playlist->setPlaylist($playlistid);
     <title>Document</title>
 </head>
 <body>
-    <h1>Playlists</h1>
-	<l4><?php echo $user->getNombre(); ?>! </l4>
+    <h1><?php echo $playlist->getNombre(); ?></h1>
+    <input type="hidden" name="playlist2" value=$playlist />
+    <p4 class="seguidores"><a href="playlistseguidores.php">Seguidores</a></p4>
+    <p4>: <?php echo $playlist->getNseguidores();?></p4>
     <li class="volver">
 		<a href="homeplaylist.php">Volver</a>
 	</li>
-    <l4>Proximamente <?php echo $playlist->getNombre(); ?>! </l4>
 </body>
 </html>
