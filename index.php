@@ -14,12 +14,6 @@ if(isset($_SESSION['user'])){
 	if($user->userExists($userForm, $passForm)){
 		$user = new User();
 		$user->setUser($userForm);
-		$user->isArtista($user->getId());
-		if($user->getIsArtista()){
-			$user->setBiografia($user->getId());
-		}
-		$user->setPlaylistsSeguidas($user->getId());
-		
 		$_SESSION['user'] = $user;
 
 		header("location: home.php");

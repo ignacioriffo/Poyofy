@@ -16,7 +16,7 @@ if(isset($_POST['playlist'])){
     $playlist->setPlaylist($playlistid);
     $playlist->setSeguidores();
     $user->setCurrPlaylist($playlist);
-    //echo $user->getCurrPlaylist()->getNombre();
+
     $_SESSION['user'] = $user;
 }else{
     $playlist = $user->getCurrPlaylist();
@@ -35,5 +35,7 @@ if(isset($_POST['playlist'])){
     <li class="volver">
 		<a href="homeplaylist.php">Volver</a>
 	</li>
+    <br><br>
+    <p4 class="seguidores"><a href="playlistseguidores.php">Seguidores</a></p4>
 </body>
 </html>

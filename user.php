@@ -20,7 +20,7 @@ class User extends DB{
 	public function getCurrPlaylist(){
 		return $this->currPlaylist;
 	}
-
+/*
 	public function setPlaylistsSeguidas(){
 		$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
 		$query->execute(['id' => $this->id_user]);
@@ -31,7 +31,7 @@ class User extends DB{
 			array_push($this->playlists,$playlist);
 		}
 	}
-
+*/
 	public function getPlaylists(){
 		return $this->playlists;
 	}
@@ -39,26 +39,6 @@ class User extends DB{
 	public function getPlaylistsSeguidas(){
 		foreach($this->playlists as $Playlist){
 			echo $Playlist->getNombre() . "<br />";
-		}
-	}
-
-	public function setBiografia($id){
-		$query = $this->connect()->prepare('SELECT biografia FROM artistas WHERE id_user = :id');
-		$query->execute(['id' => $id]);
-
-		foreach ($query as $currentUser) {
-			$this->biografia = $currentUser['biografia'];
-		}
-	}
-
-	public function isArtista($id){
-		$query = $this->connect()->prepare('SELECT * FROM  artistas WHERE id_user = :id');
-		$query->execute(['id' => $id]);
-
-		if($query->rowCount()){
-			$this->isartista = true;
-		}else{
-			$this->isartista = false;
 		}
 	}
 
@@ -87,6 +67,33 @@ class User extends DB{
 			$this->username = $currentUser['username'];
 			$this->playlists = array();
 			$this->currPlaylist = new Playlist();
+			$this->isartista = false;
+
+			$query = $this->connect()->prepare('SELECT * FROM  artistas WHERE id_user = :id');
+			$query->execute(['id' => $currentUser['id_user']]);
+
+			if($query->rowCount()){
+				$this->isartista = true;
+			}
+			
+			if($this->isartista){
+				$query = $this->connect()->prepare('SELECT biografia FROM artistas WHERE id_user = :id');
+				$query->execute(['id' => $this->id_user]);
+		
+				foreach ($query as $currentUser){
+					$this->biografia = $currentUser['biografia'];
+				}
+
+			}
+
+			$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
+			$query->execute(['id' => $this->id_user]);
+			
+			foreach($query as $currentId){
+				$playlist = new Playlist();
+				$playlist->setPlaylist($currentId['id_playlist']);
+				array_push($this->playlists,$playlist);
+			}
 		}
 	}
 
@@ -99,8 +106,36 @@ class User extends DB{
 			$this->username = $currentUser['username'];
 			$this->playlists = array();
 			$this->currPlaylist = new Playlist();
+			$this->isartista = false;
+
+			$query = $this->connect()->prepare('SELECT * FROM  artistas WHERE id_user = :id');
+			$query->execute(['id' => $currentUser['id_user']]);
+
+			if($query->rowCount()){
+				$this->isartista = true;
+			}
+			
+			if($this->isartista){
+				$query = $this->connect()->prepare('SELECT biografia FROM artistas WHERE id_user = :id');
+				$query->execute(['id' => $this->id_user]);
+		
+				foreach ($query as $currentUser){
+					$this->biografia = $currentUser['biografia'];
+				}
+
+			}
+
+			$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
+			$query->execute(['id' => $this->id_user]);
+			
+			foreach($query as $currentId){
+				$playlist = new Playlist();
+				$playlist->setPlaylist($currentId['id_playlist']);
+				array_push($this->playlists,$playlist);
+			}
 		}
 	}
+
 
 	public function getNombre(){
 		return $this->username;

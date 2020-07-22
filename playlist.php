@@ -18,11 +18,6 @@ class Playlist extends DB{
 			$nseguidores++;
 			$seguidor = new User();
 			$seguidor->setUserId($currentUser['id_user']);
-			$seguidor->isArtista($seguidor->getId());
-			if($seguidor->getIsArtista()){
-				$seguidor->setBiografia($seguidor->getId());
-			}
-			$seguidor->setPlaylistsSeguidas($seguidor->getId());
 			array_push($this->seguidores,$seguidor);
 		}
 		$this->num_seguidores = $nseguidores;

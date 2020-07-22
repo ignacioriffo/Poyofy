@@ -14,11 +14,6 @@ $uservisita = new User();
 if(isset($_POST['seguidor'])){
     $username = $_POST['seguidor'];
     $uservisita->setUserId($username);
-    $uservisita->isArtista($uservisita->getId());
-    if($uservisita->getIsArtista()){
-        $uservisita->setBiografia($uservisita->getId());
-    }
-    $uservisita->setPlaylistsSeguidas($uservisita->getId());
 }
 ?>
 <!DOCTYPE html>
