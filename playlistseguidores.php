@@ -27,5 +27,16 @@ $playlist = $user->getCurrPlaylist();
             <a href="playlistsongs.php">Volver</a>
     </li>
     
+    <?php
+
+    echo "<form action='visitausuario.php' method='post'>";
+    foreach($playlist->getSeguidores() as $seguidor){
+      $seguidorname = $seguidor->getNombre();
+      $seguidorid = $seguidor->getId();
+      echo "<button type='submit' name='seguidor' value='" . $seguidorid . "'>" . $seguidorname . "</button>";
+    }
+    echo "</form>";
+
+    ?>
 </body>
 </html>
