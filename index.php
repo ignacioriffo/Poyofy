@@ -12,7 +12,15 @@ if(isset($_SESSION['user'])){
 	$passForm = $_POST['password'];
 
 	if($user->userExists($userForm, $passForm)){
-		$_SESSION['user'] = $userForm;
+		$user = new User();
+		$user->setUser($userForm);
+		$user->isArtista($user->getId());
+		if($user->getIsArtista()){
+			$user->setBiografia($user->getId());
+		}
+		$user->setPlaylistsSeguidas($user->getId());
+		
+		$_SESSION['user'] = $user;
 
 		header("location: home.php");
 	}else{

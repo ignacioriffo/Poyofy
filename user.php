@@ -17,7 +17,7 @@ class User extends DB{
 		$this->currPlaylist = $playlist;
 	}
 
-	public function getCurrPlaylist($playlist){
+	public function getCurrPlaylist(){
 		return $this->currPlaylist;
 	}
 
@@ -86,6 +86,7 @@ class User extends DB{
 			$this->id_user = $currentUser['id_user'];
 			$this->username = $currentUser['username'];
 			$this->playlists = array();
+			$this->currPlaylist = new Playlist();
 		}
 	}
 
@@ -97,6 +98,7 @@ class User extends DB{
 			$this->id_user = $currentUser['id_user'];
 			$this->username = $currentUser['username'];
 			$this->playlists = array();
+			$this->currPlaylist = new Playlist();
 		}
 	}
 
