@@ -37,9 +37,9 @@ class Cancion extends DB {
 			$this->id_user = $currentCancion['id_user'];
 			$this->id_album = $currentCancion['id_album'];
 			$this->nombre = $currentCancion['nombre'];
-            $this->genero = $currentCancion['genero'];
-            $this->duracion = $currentCancion['duracion'];
-            $this->fecha = $currentCancion['fecha'];
+      $this->genero = $currentCancion['genero'];
+      $this->duracion = $currentCancion['duracion'];
+      $this->fecha = $currentCancion['fecha'];
 		}
     }
     

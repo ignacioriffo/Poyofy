@@ -18,7 +18,7 @@ if(isset($_SESSION['user'])){
 
 		header("location: home.php");
 	}else{
-		$errorLogin = "nombre de usuario y/o contraseña incorrecta";
+		$errorLogin = "Nombre de usuario y/o contraseña incorrecta";
 		include_once 'login.php';
 	}
 }else{
