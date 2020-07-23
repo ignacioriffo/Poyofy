@@ -14,35 +14,7 @@ $playlist = new Playlist();
 $playlist = $user->getCurrPlaylist();
 
 ?>
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <li class="volver">
-            <a href="playlistsongs.php">Volver</a>
-    </li>
-    
-    <?php
 
-    echo "<form action='visitausuario.php' method='post'>";
-    foreach($playlist->getSeguidores() as $seguidor){
-      $seguidorname = $seguidor->getNombre();
-      $seguidorid = $seguidor->getId();
-      echo "<button type='submit' name='seguidor' value='" . $seguidorid . "'>" . $seguidorname . "</button>";
-      echo "<br>";
-    }
-    echo "</form>";
-
-    ?>
-</body>
-</html>
--->
 <!doctype html>
 <html lang="en">
   <head>
@@ -64,6 +36,7 @@ $playlist = $user->getCurrPlaylist();
     <a class="nav-link" href="logout.php">Cerrar sesión</a>
     </nav>
 
+    <div class="container">
     <h2>Seguidores de <?php echo $playlist->getNombre(); ?></h2>
 
     <table class="table">
@@ -82,6 +55,7 @@ $playlist = $user->getCurrPlaylist();
     ?>
     </tbody>
     </table>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -25,7 +25,7 @@ $playlists = $user->getPlaylists();
     <title>Playlist</title>
   </head>
   <body>
-  	<nav class="nav">
+  <nav class="nav">
 	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
 	<a class="nav-link disabled" href="homeplaylist.php">Playlist</a>
 	<a class="nav-link" href="home.php">Volver</a>

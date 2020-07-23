@@ -46,6 +46,7 @@ $canciones = $playlist->getCanciones();
     <a class="nav-link" href="logout.php">Cerrar sesión</a>
     </nav>
 
+    <div class="container">
     <h3><?php echo $playlist->getNombre(); ?></h3>
     <p6>Creada por  <?php echo $playlist->getCreador() . "<br>"; ?></p6>
     <p4><?php echo $playlist->getNseguidores() . " Seguidores<br>";?></p4>
@@ -73,6 +74,7 @@ $canciones = $playlist->getCanciones();
     ?>
     </tbody>
     </table>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

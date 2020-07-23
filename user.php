@@ -20,18 +20,7 @@ class User extends DB{
 	public function getCurrPlaylist(){
 		return $this->currPlaylist;
 	}
-/*
-	public function setPlaylistsSeguidas(){
-		$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
-		$query->execute(['id' => $this->id_user]);
-		
-		foreach($query as $currentId){
-			$playlist = new Playlist();
-			$playlist->setPlaylist($currentId['id_playlist']);
-			array_push($this->playlists,$playlist);
-		}
-	}
-*/
+
 	public function getPlaylists(){
 		return $this->playlists;
 	}
@@ -50,6 +39,17 @@ class User extends DB{
 		$exists;
 		$query = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user AND password = :pass');
 		$query->execute(['user' => $user, 'pass' => $pass]);
+
+		if($query->rowCount()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function registroExists($user){
+		$query = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user');
+		$query->execute(['user' => $user]);
 
 		if($query->rowCount()){
 			return true;
