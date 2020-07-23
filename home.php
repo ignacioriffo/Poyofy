@@ -24,7 +24,7 @@ $user = $_SESSION['user']
 	<br>
 	<l4><?php
 		if($user->getIsArtista()){
-			echo $user->getBiografia();
+			echo $user->getBiografia() . "<br>";
 		}
 		?>
 	</l4>

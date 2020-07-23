@@ -18,7 +18,7 @@ $playlists = $user->getPlaylists();
 </head>
 <body>
 	<h1>Playlists</h1>
-	<l4>Playlists de  <?php echo $user->getNombre(); ?>! </l4>
+	<l4>Playlists de  <?php echo $user->getNombre(); ?> </l4>
 
 	<li class="volver">
 		<a href="index.php">Volver</a>

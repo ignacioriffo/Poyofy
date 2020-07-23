@@ -8,6 +8,26 @@ class Cancion extends DB {
     private $duracion;
     private $fecha;
 
+  public function getAlbum(){
+    $query = $this->connect()->prepare('SELECT * FROM albumes WHERE id_album = :id');
+    $query->execute(['id' => $this->id_album]);
+
+    foreach ($query as $currentUser){
+      return $currentUser['nombre'];
+    }
+    
+  }
+
+  public function getCreador(){
+    $query = $this->connect()->prepare('SELECT * FROM personas WHERE id_user = :id');
+    $query->execute(['id' => $this->id_user]);
+
+    foreach ($query as $currentUser){
+      return $currentUser['username'];
+    }
+    
+  }
+
 	public function setCancion($id_cancion){
 		$query = $this->connect()->prepare('SELECT * FROM canciones WHERE id_cancion = :id');
 		$query->execute(['id' => $id_cancion]);
@@ -24,14 +44,14 @@ class Cancion extends DB {
     }
     
     public function getId(){
-		return $this->seguidores;
+		return $this->id_cancion;
     }
     
     public function getUser(){
 		return $this->id_user;
     }
     
-    public function getAlbum(){
+    public function getIdAlbum(){
 		return $this->id_album;
     }
     

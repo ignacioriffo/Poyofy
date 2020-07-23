@@ -34,6 +34,7 @@ $playlist = $user->getCurrPlaylist();
       $seguidorname = $seguidor->getNombre();
       $seguidorid = $seguidor->getId();
       echo "<button type='submit' name='seguidor' value='" . $seguidorid . "'>" . $seguidorname . "</button>";
+      echo "<br>";
     }
     echo "</form>";
 
