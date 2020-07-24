@@ -30,7 +30,7 @@ $user = $_SESSION['user']
 	</nav>
   <div class="container">
 	<h3>Bienvenido a Poyofy!</h3>
-	
+	<p6><?php echo $user->getSeguidores() . " Seguidores"?></p6>
 	<h6><?php
   
 		if($user->getIsArtista()){

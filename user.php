@@ -14,6 +14,17 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function getSeguidores(){
+		$query = $this->connect()->prepare('SELECT id_seguidor FROM personas_personas WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		
+		$seguidores = 0;
+		foreach($query as $currentId){
+			$seguidores++;
+		}
+		return $seguidores;
+	}
+
 	public function getSeguidos(){
 		return $this->seguidos;
 	}

@@ -27,19 +27,19 @@ $seguidos = $user->getSeguidos()
   </head>
   <body>
     <nav class="nav">
-	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
-	<a class="nav-link" href="homeplaylist.php">Playlist</a>
+    <a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
+    <a class="nav-link" href="homeplaylist.php">Playlist</a>
     <a class="nav-link" href="home.php">Volver</a>
-	<a class="nav-link" href="logout.php">Cerrar sesión</a>
-	</nav>
+    <a class="nav-link" href="logout.php">Cerrar sesión</a>
+    </nav>
     <div class="container">
     <h3>Seguidos</h3>
     <?php
     foreach($seguidos as $seguido){
 		$seguidoname = $seguido->getNombre();
     $seguidoid = $seguido->getId();
-    echo "<form action='visitausuario.php'>";
-		echo "<button type='submit' class='btn btn-link' name='playlist' value='" . $seguidoid . "'>" . $seguidoname . "</button>";
+    echo "<form action='visitausuario.php'  method='post'>";
+		echo "<button type='submit' class='btn btn-link' name='seguido' value='" . $seguidoid . "'>" . $seguidoname . "</button>";
     echo "<br>";
     echo "</form>";
     }
