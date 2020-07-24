@@ -12,6 +12,18 @@ class User extends DB{
 	private $biografia;
 	private $playlists;
 	private $currPlaylist;
+	private $seguidos;
+
+	public function setSeguidos(){
+		$query = $this->connect()->prepare('SELECT id_user FROM personas_personas WHERE id_seguidor = :id');
+		$query->execute(['id' => $this->id_user]);
+		
+		foreach($query as $currentId){
+			$seguido = new User();
+			$seguido->setUserId($currentId['id_user']);
+			array_push($this->seguidos,$seguido);
+		}
+	}
 
 	public function insertUser($username, $pass, $type){
 		$query = $this->connect()->prepare('INSERT INTO `personas`(`username`, `password`) VALUES (:user,:pass)');
@@ -92,6 +104,7 @@ class User extends DB{
 			$this->playlists = array();
 			$this->currPlaylist = new Playlist();
 			$this->isartista = false;
+			$this->seguidos = array();
 
 			$query = $this->connect()->prepare('SELECT * FROM  artistas WHERE id_user = :id');
 			$query->execute(['id' => $currentUser['id_user']]);
@@ -131,6 +144,7 @@ class User extends DB{
 			$this->playlists = array();
 			$this->currPlaylist = new Playlist();
 			$this->isartista = false;
+			$this->seguidos = array();
 
 			$query = $this->connect()->prepare('SELECT * FROM  artistas WHERE id_user = :id');
 			$query->execute(['id' => $currentUser['id_user']]);

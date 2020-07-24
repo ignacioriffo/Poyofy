@@ -7,7 +7,9 @@ if(!isset($_SESSION['user'])){
 }
 
 $user = new User();
-$user = $_SESSION['user']
+$user = $_SESSION['user'];
+
+$user->setSeguidos();
 
 ?>
 <!doctype html>
