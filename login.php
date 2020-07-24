@@ -15,16 +15,17 @@
     <title>Login</title>
   </head>
   <body>
-	<?php
-		if(isset($errorLogin)){
-			echo $errorLogin;
-		}
-	?>
+
 	<nav class="nav">
 	<a class="nav-link" href="registro.php">Registrate</a>
 	</nav>
 	<div class="container">
 	<h3>Poyofy</h3>
+	<?php
+		if(isset($errorLogin)){
+			echo $errorLogin;
+		}
+	?>
 	<form action="" method="POST">
 	<div class="form-group">
 		<label for="exampleInputEmail1">Nombre de usuario</label>

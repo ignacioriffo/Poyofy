@@ -37,12 +37,14 @@ $user = $_SESSION['user']
     echo "<form action='homebiografia.php'>";
     echo "<button type='submit' class='btn btn-link' name='biografia'>Biografia</button>";
     echo "<br>";
+    echo "</form>";
     //echo $user->getBiografia() . "<br>";
     }
     
     echo "<form action='userseguidores.php'>";
     echo "<button type='submit' class='btn btn-link' name='seguidores'>Seguidores</button>";
     echo "<br>";
+    echo "</form>";
 		?>
     
 	</h6>
