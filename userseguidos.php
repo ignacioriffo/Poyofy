@@ -10,6 +10,7 @@ $user = new User();
 $user = $_SESSION['user'];
 
 $user->setSeguidos();
+$seguidos = $user->getSeguidos()
 
 ?>
 <!doctype html>
@@ -33,6 +34,16 @@ $user->setSeguidos();
 	</nav>
     <div class="container">
     <h3>Seguidos</h3>
+    <?php
+    foreach($seguidos as $seguido){
+		$seguidoname = $seguido->getNombre();
+    $seguidoid = $seguido->getId();
+    echo "<form action='visitausuario.php'>";
+		echo "<button type='submit' class='btn btn-link' name='playlist' value='" . $seguidoid . "'>" . $seguidoname . "</button>";
+    echo "<br>";
+    echo "</form>";
+    }
+    ?>
     </div>
 
     <!-- Optional JavaScript -->

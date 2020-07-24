@@ -14,15 +14,21 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function getSeguidos(){
+		return $this->seguidos;
+	}
+
 	public function setSeguidos(){
 		$query = $this->connect()->prepare('SELECT id_user FROM personas_personas WHERE id_seguidor = :id');
 		$query->execute(['id' => $this->id_user]);
 		
+		$seguidos = array();
 		foreach($query as $currentId){
 			$seguido = new User();
 			$seguido->setUserId($currentId['id_user']);
-			array_push($this->seguidos,$seguido);
+			array_push($seguidos,$seguido);
 		}
+		$this->seguidos = $seguidos;
 	}
 
 	public function insertUser($username, $pass, $type){
