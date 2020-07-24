@@ -41,8 +41,8 @@ $user = $_SESSION['user']
     //echo $user->getBiografia() . "<br>";
     }
     
-    echo "<form action='userseguidores.php'>";
-    echo "<button type='submit' class='btn btn-link' name='seguidores'>Seguidores</button>";
+    echo "<form action='userseguidos.php'>";
+    echo "<button type='submit' class='btn btn-link' name='seguidos'>Seguidos</button>";
     echo "<br>";
     echo "</form>";
 		?>

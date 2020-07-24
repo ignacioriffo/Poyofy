@@ -26,9 +26,12 @@ $user = $_SESSION['user']
     <nav class="nav">
 	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
 	<a class="nav-link" href="homeplaylist.php">Playlist</a>
+    <a class="nav-link" href="home.php">Volver</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
 	</nav>
-    <h1>Hello, world!</h1>
+    <div class="container">
+    <h3>Seguidos</h3>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
