@@ -57,6 +57,7 @@ $canciones = $playlist->getCanciones();
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nombre</th>
+      <th scope="col">Artista</th>
       <th scope="col">Duración</th>
     </tr>
     </thead>
@@ -67,6 +68,7 @@ $canciones = $playlist->getCanciones();
         echo "<tr>";
         echo "<th scope='row'>" . $nsong . "</th>";
         echo "<td>" . $cancion->getNombre() . "</td>";
+        echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
         echo "</tr>";
         $nsong++;
