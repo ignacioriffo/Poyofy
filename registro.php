@@ -9,14 +9,15 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['opci
 	$userForm = $_POST['username'];
     $passForm = $_POST['password'];
     $typeForm = $_POST['opcion'];
+    $seguidores = 0;
 
 	if($user->registroExists($userForm)){
         $error = "Nombre de usuario no esta disponible!";
 		include_once 'registro.php';
-	}/*else{
-        $query = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user AND password = :pass');
-		$query->execute(['user' => $user, 'pass' => $pass]);
-    }*/
+	}else{
+        $user->insertUser($userForm,$passForm,$typeForm,$seguidores);
+        $usercreado = "Cuenta creada correctamente!";
+    }
 }
 ?>
 <!doctype html>
@@ -62,6 +63,11 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['opci
         <br>
 	    <button type="submit" class="btn btn-primary">Registrarse</button>
 	</form>
+    <?php
+		if(isset($usercreado)){
+            echo $usercreado;
+		}
+	?>
 	</div>
 
     <!-- Optional JavaScript -->

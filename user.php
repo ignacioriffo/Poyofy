@@ -13,6 +13,30 @@ class User extends DB{
 	private $playlists;
 	private $currPlaylist;
 
+	public function insertUser($username, $pass, $type, $seguidores){
+		$query = $this->connect()->prepare('INSERT INTO `personas`(`username`, `password`, `seguidores`) VALUES (:user,:pass,:seguidores)');
+		$query->execute(['user' => $username, 'pass' => $pass, 'seguidores' => $seguidores]);
+
+		if($type == "usuario"){
+			$datos = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user AND password = :pass');
+			$datos->execute(['user' => $username, 'pass' => $pass]);
+			foreach($datos as $newUser){
+				$id = $newUser['id_user'];
+				$query = $this->connect()->prepare('INSERT INTO `usuarios`(`id_user`) VALUES (:id)');
+				$query->execute(['id' => $id]);
+			}
+		}else{
+			$datos = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user AND password = :pass');
+			$datos->execute(['user' => $username, 'pass' => $pass]);
+			foreach($datos as $newUser){
+				$biografia = "";
+				$id = $newUser['id_user'];
+				$query = $this->connect()->prepare('INSERT INTO `artistas`(`id_user`, `biografia`) VALUES (:id,:biografia)');
+				$query->execute(['id' => $id, 'biografia'=> $biografia]);
+			}
+		}
+	}
+
 	public function setCurrPlaylist($playlist){
 		$this->currPlaylist = $playlist;
 	}
