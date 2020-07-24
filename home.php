@@ -28,7 +28,7 @@ $user = $_SESSION['user']
 	<a class="nav-link" href="homeplaylist.php">Playlist</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
 	</nav>
-
+  <div class="container">
 	<h3>Bienvenido a Poyofy!</h3>
 	
 	<h6><?php
@@ -46,7 +46,7 @@ $user = $_SESSION['user']
 		?>
     
 	</h6>
-	
+	</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

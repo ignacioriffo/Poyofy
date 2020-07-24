@@ -23,6 +23,11 @@ $user = $_SESSION['user']
     <title>Hello, world!</title>
   </head>
   <body>
+    <nav class="nav">
+	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
+	<a class="nav-link" href="homeplaylist.php">Playlist</a>
+	<a class="nav-link" href="logout.php">Cerrar sesión</a>
+	</nav>
     <h1>Hello, world!</h1>
 
     <!-- Optional JavaScript -->
