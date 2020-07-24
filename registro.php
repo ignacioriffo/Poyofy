@@ -15,7 +15,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['opci
         $error = "Nombre de usuario no esta disponible!";
 		include_once 'registro.php';
 	}else{
-        $user->insertUser($userForm,$passForm,$typeForm,$seguidores);
+        $user->insertUser($userForm,$passForm,$typeForm);
         $usercreado = "Cuenta creada correctamente!";
     }
 }

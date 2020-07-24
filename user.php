@@ -13,9 +13,9 @@ class User extends DB{
 	private $playlists;
 	private $currPlaylist;
 
-	public function insertUser($username, $pass, $type, $seguidores){
-		$query = $this->connect()->prepare('INSERT INTO `personas`(`username`, `password`, `seguidores`) VALUES (:user,:pass,:seguidores)');
-		$query->execute(['user' => $username, 'pass' => $pass, 'seguidores' => $seguidores]);
+	public function insertUser($username, $pass, $type){
+		$query = $this->connect()->prepare('INSERT INTO `personas`(`username`, `password`) VALUES (:user,:pass)');
+		$query->execute(['user' => $username, 'pass' => $pass]);
 
 		if($type == "usuario"){
 			$datos = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user AND password = :pass');
