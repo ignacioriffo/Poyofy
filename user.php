@@ -173,6 +173,12 @@ class User extends DB{
 		return $this->biografia;
 	}
 
+	public function editarBiografia($newBiografia){
+		$query = $this->connect()->prepare('UPDATE artistas SET biografia = :biografia WHERE id_user = :id');
+		$query->execute(['biografia' => $newBiografia, 'id' => $this->id_user]);
+		$this->biografia = $newBiografia;
+	}
+
 }
 
 ?>

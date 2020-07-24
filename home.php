@@ -30,14 +30,18 @@ $user = $_SESSION['user']
 	</nav>
 
 	<h3>Bienvenido a Poyofy!</h3>
-	<!--
+	
 	<h6><?php
+  
 		if($user->getIsArtista()){
-			echo $user->getBiografia() . "<br>";
+    echo "<form action='homebiografia.php'>";
+    echo "<button type='submit' class='btn btn-link' name='biografia'>Biografia</button>";
+    echo "<br>";
+		//echo $user->getBiografia() . "<br>";
 		}
 		?>
 	</h6>
-	-->
+	
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
