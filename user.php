@@ -13,6 +13,19 @@ class User extends DB{
 	private $playlists;
 	private $currPlaylist;
 	private $seguidos;
+	
+	public function getPlaylistsCreadas(){
+		$query = $this->connect()->prepare('SELECT id_playlist FROM playlists WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		$playlistsCreadas = array();
+
+		foreach($query as $currentId){
+			$playlist = new Playlist();
+			$playlist->setPlaylist($currentId['id_playlist']);
+			array_push($playlistsCreadas,$playlist);
+		}
+		return $playlistsCreadas;
+	}
 
 	public function getSeguidores(){
 		$query = $this->connect()->prepare('SELECT id_seguidor FROM personas_personas WHERE id_user = :id');
