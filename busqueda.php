@@ -14,7 +14,10 @@ $canciones = array();
 
 if(isset($_POST['busqueda'])){
     $busqueda = $_POST['busqueda'];
-    $canciones = $user->searchSongs($busqueda);
+    $listabusqueda = $user->searchSongs($busqueda);
+    $canciones = $listabusqueda[0];
+    $playlists = $listabusqueda[1];
+    $personas = $listabusqueda[2];
 }
 
 
@@ -43,16 +46,10 @@ if(isset($_POST['busqueda'])){
   </nav>
     <div class="container">
     <h3>Canciones</h3>
-    <?php
-    echo "<form action='home.php'>";
-    echo "<button type='submit' class='btn btn-link' name='volver'>Home</button>";
-    echo "</form>";
-    ?>
     
     <table class="table">
     <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
       <th scope="col">Duración</th>
@@ -60,22 +57,53 @@ if(isset($_POST['busqueda'])){
     </thead>
     <tbody>
     <?php
-      $nsong = 1;
+      $index = 0;
       foreach($canciones as $cancionid){
         $cancion = new Cancion();
         $cancion->setCancion($cancionid);
         echo "<tr>";
-        echo "<th scope='row'>" . $nsong . "</th>";
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
         echo "</tr>";
-        $nsong++;
+        if($index == 4){
+          break;
+        }
+        $index++;
       }
     ?>
+    
     </tbody>
     </table>
-    </div>
+    
+    <br>
+    <h3>Playlists</h3>
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Creador</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+      $index = 0;
+      foreach($playlists as $playlistid){
+        $playlist = new Playlist();
+        $playlist->setPlaylist($playlistid);
+        echo "<tr>";
+        echo "<td>" . $playlist->getNombre() . "</td>";
+        echo "<td>" . $playlist->getCreador() . "</td>";
+        echo "</tr>";
+        if($index == 4){
+          break;
+        }
+        $index++;
+      }
+    ?>
+    
+    </tbody>
+    </table>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
