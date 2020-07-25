@@ -7,7 +7,7 @@ if(!isset($_SESSION['user'])){
 }
 
 $user = new User();
-$user = $_SESSION['user']
+$user = $_SESSION['user'];
 
 ?>
 <!doctype html>
@@ -23,11 +23,16 @@ $user = $_SESSION['user']
     <title>Bienvenido!</title>
   </head>
   <body>
-	<nav class="nav">
-	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
+  <nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="nav-link" href="home.php"><?php echo $user->getNombre(); ?></a>
 	<a class="nav-link" href="homeplaylist.php">Playlist</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
-	</nav>
+  <form class="form-inline" action='busqueda.php' method='post'>
+    <input class="form-control mr-sm-2" type="search" placeholder="Ingrese busqueda" aria-label="Search"  name='busqueda'>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+  </nav>
+
   <div class="container">
 	<h3>Bienvenido a Poyofy!</h3>
 	<p6><?php echo $user->getSeguidores() . " Seguidores"?></p6>
