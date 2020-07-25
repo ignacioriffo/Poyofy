@@ -47,8 +47,8 @@ $user = $_SESSION['user']
     echo "</form>";
 
     if(!$user->getIsArtista()){
-      echo "<form action='playlistcreadas.php'>";
-      echo "<button type='submit' class='btn btn-link' name='playlistc'>Playlist Creadas</button>";
+      echo "<form action='playlistcreadas.php'  method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='playlist'>Playlist Creadas</button>";
       echo "<br>";
       echo "</form>";
     }

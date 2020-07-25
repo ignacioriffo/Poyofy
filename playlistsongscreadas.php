@@ -41,7 +41,7 @@ $canciones = $playlist->getCanciones();
     <nav class="nav">
     <a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
     <a class="nav-link disabled" href="homeplaylist.php">Playlist</a>
-    <a class="nav-link" href="playlistseguidores.php">Seguidores</a>
+    <!--<a class="nav-link" href="playlistseguidores.php">Seguidores</a>-->
     <a class="nav-link" href="playlistcreadas.php">Volver</a>
     <a class="nav-link" href="logout.php">Cerrar sesión</a>
     </nav>
