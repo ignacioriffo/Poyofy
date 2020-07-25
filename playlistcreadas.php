@@ -27,6 +27,7 @@ $playlists = $user->getPlaylistsCreadas();
   <body>
     <nav class="nav">
 	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
+    <a class="nav-link disabled" href="#"  aria-disabled="true">Playlist Creadas</a>
 	<a class="nav-link" href="home.php">Volver</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
 	</nav>
