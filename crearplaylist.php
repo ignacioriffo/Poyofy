@@ -9,9 +9,15 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
-$playlists = $user->getPlaylistsCreadas();
+if(isset($_POST['playlist']) && isset($_POST['descripcion'])){
+	$playlistForm = $_POST['playlist'];
+    $descripcionForm = $_POST['descripcion'];
 
+    $playlistcreada = "Cuenta creada correctamente!";
+    $user->crearPlaylist($playlistForm, $descripcionForm);
+}
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -28,26 +34,31 @@ $playlists = $user->getPlaylistsCreadas();
     <nav class="nav">
 	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
     <a class="nav-link disabled" href="#"  aria-disabled="true">Playlist Creadas</a>
-	<a class="nav-link" href="home.php">Volver</a>
+	<a class="nav-link" href="playlistcreadas.php">Volver</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
 	</nav>
     <div class="container">
-    <h1>Playlist Creadas</h1>
-    <?php
-    	echo "<form action='playlistsongscreadas.php' method='post'>";
-        foreach($playlists as $playlist){
-            $playlistname = $playlist->getNombre();
-            $playlistid = $playlist->getId();
-            echo "<button type='submit' class='btn btn-link' name='playlist' value='" . $playlistid . "'>" . $playlistname . "</button>";
-            echo "<br>";
-        }
-        echo "</form>";
 
-        echo "<form action='crearplaylist.php'>";
-        echo "<button type='submit' class='btn btn-link' name='crearplaylist'>Crear playlist</button>";
-        echo "<br>";
-    ?>
+    <h1>Playlist Creadas</h1>
+
+    <form action="" method="POST">
+	<div class="form-group">
+		<label for="exampleInputEmail1">Nombre de playlist</label>
+		<input type="text" class="form-control" name="playlist" id="playlist" aria-describedby="emailHelp" placeholder="Ingrese Nombre">
+	</div>
+    <div class="form-group">
+		<label for="exampleInputEmail1">Descripción</label>
+		<input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="emailHelp" placeholder="Ingrese Descripción">
+	</div>
+	    <button type="submit" class="btn btn-primary">Crear</button>
+	</form>
+    <?php
+		if(isset($playlistcreada)){
+            echo $playlistcreada;
+		}
+	?>
     </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

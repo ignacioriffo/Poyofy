@@ -13,6 +13,11 @@ class User extends DB{
 	private $playlists;
 	private $currPlaylist;
 	private $seguidos;
+
+	public function crearPlaylist($nombre, $descripcion){
+		$query = $this->connect()->prepare('INSERT INTO `playlists`(`id_user`, `nombre`, `descripcion`) VALUES (:id,:nombre,:descripcion)');
+		$query->execute(['id' => $this->id_user, 'nombre' => $nombre, 'descripcion' => $descripcion]);
+	}
 	
 	public function getPlaylistsCreadas(){
 		$query = $this->connect()->prepare('SELECT id_playlist FROM playlists WHERE id_user = :id');
