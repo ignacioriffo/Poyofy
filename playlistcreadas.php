@@ -9,6 +9,12 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['borrarplaylist'])){
+    $user->borrarPlaylist($_POST['borrarplaylist']);
+    $playlistcreada = "Borrado correctamente!";
+}
+
+
 $playlists = $user->getPlaylistsCreadas();
 
 ?>
@@ -46,6 +52,7 @@ $playlists = $user->getPlaylistsCreadas();
         echo "<form action='crearplaylist.php'>";
         echo "<button type='submit' class='btn btn-link' name='crearplaylist'>Crear playlist</button>";
         echo "<br>";
+
     ?>
     </div>
     <!-- Optional JavaScript -->

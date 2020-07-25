@@ -76,6 +76,11 @@ $canciones = $playlist->getCanciones();
     ?>
     </tbody>
     </table>
+    <?php
+      echo "<form action='playlistcreadas.php'  method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='borrarplaylist' value='" . $playlist->getId() . "'>Borrar playlist</button>";
+      echo "<br>";
+    ?>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
