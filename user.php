@@ -14,6 +14,42 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	function searchSongs($string){
+        $query = $string;
+        $min_length = 1;
+        // you can set minimum length of the query if you want
+		if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
+            $query = htmlspecialchars($query); 
+            // changes characters used in html to their equivalents, for example: < to &gt;
+            $str = "SELECT id_cancion FROM canciones WHERE (nombre LIKE '%".$query."%')";
+            #$q = $this->query($pdo, $str);
+            $q = $this->connect()->prepare($str);
+            $q->execute();
+            // * means that it selects all fields, you can also write: id, title, text
+            // articles is the name of our table
+
+            // '%$query%' is what we're looking for, % means anything, for example if $query is Hello
+            // it will match "hello", "Hello man", "gogohello", if you want exact match use title='$query'
+            // or if you want to match just full word so "gogohello" is out use '% $query %' ...OR ... '$query %' ... OR ... '% $query'
+            $numResults = $q->rowCount();
+            $lista = [];
+            if($numResults > 0){ // if one or more rows are returned do following
+                $cont = 0;
+                while($cont < $numResults){
+                    array_push($lista, $q->fetchColumn(0));
+                    $cont++;
+                }
+                return $lista;
+            }
+            else{ // if there is no matching rows do following
+                return [];
+            }
+        }
+        else{ // if query length is less than minimum
+            return [];
+        }
+    }
+
 	public function borrarPlaylist($id){
 		$query = $this->connect()->prepare('DELETE FROM `playlists` WHERE id_playlist = :id');
 		$query->execute(['id' => $id]);

@@ -1,5 +1,6 @@
 <?php
 include_once 'user.php';
+include_once 'cancion.php';
 session_start();
 
 if(!isset($_SESSION['user'])){
@@ -9,9 +10,13 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+$canciones = array();
+
 if(isset($_POST['busqueda'])){
     $busqueda = $_POST['busqueda'];
+    $canciones = $user->searchSongs($busqueda);
 }
+
 
 ?>
 <!doctype html>
@@ -43,8 +48,35 @@ if(isset($_POST['busqueda'])){
     echo "<button type='submit' class='btn btn-link' name='volver'>Home</button>";
     echo "</form>";
     ?>
+    
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Artista</th>
+      <th scope="col">Duración</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+      $nsong = 1;
+      foreach($canciones as $cancionid){
+        $cancion = new Cancion();
+        $cancion->setCancion($cancionid);
+        echo "<tr>";
+        echo "<th scope='row'>" . $nsong . "</th>";
+        echo "<td>" . $cancion->getNombre() . "</td>";
+        echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<td>" . $cancion->getDuracion() . "</td>";
+        echo "</tr>";
+        $nsong++;
+      }
+    ?>
+    </tbody>
+    </table>
     </div>
-
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
