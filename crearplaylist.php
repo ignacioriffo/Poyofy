@@ -33,8 +33,7 @@ if(isset($_POST['playlist']) && isset($_POST['descripcion'])){
   <body>
     <nav class="nav">
 	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
-    <a class="nav-link disabled" href="#"  aria-disabled="true">Playlist Creadas</a>
-	<a class="nav-link" href="playlistcreadas.php">Volver</a>
+  <a class="nav-link" href="homeplaylist.php">Playlist</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
 	</nav>
     <div class="container">
@@ -52,7 +51,13 @@ if(isset($_POST['playlist']) && isset($_POST['descripcion'])){
 	</div>
 	    <button type="submit" class="btn btn-primary">Crear</button>
 	</form>
+  
     <?php
+    echo "<form action='playlistcreadas.php'>";
+    echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
+    echo "<br>";
+    echo "</form>";
+
 		if(isset($playlistcreada)){
             echo $playlistcreada;
 		}

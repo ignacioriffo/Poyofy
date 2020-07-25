@@ -40,9 +40,8 @@ $canciones = $playlist->getCanciones();
   <body>
     <nav class="nav">
     <a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
-    <a class="nav-link disabled" href="homeplaylist.php">Playlist</a>
-    <a class="nav-link" href="playlistseguidores.php">Seguidores</a>
-    <a class="nav-link" href="homeplaylist.php">Volver</a>
+	  <a class="nav-link" href="homeplaylist.php">Playlist</a>
+    <!--<a class="nav-link" href="playlistseguidores.php">Seguidores</a>-->
     <a class="nav-link" href="logout.php">Cerrar sesión</a>
     </nav>
 
@@ -50,7 +49,13 @@ $canciones = $playlist->getCanciones();
     <h3><?php echo $playlist->getNombre(); ?></h3>
     <p6>Creada por  <?php echo $playlist->getCreador() . "<br>"; ?></p6>
     <p4><?php echo $playlist->getNseguidores() . " Seguidores<br>";?></p4>
-    <p4>Descripción: <?php echo $playlist->getDescripcion() . "<br><br>"; ?></p4>
+    <p4>Descripción: <?php echo $playlist->getDescripcion() . "<br>"; ?></p4>
+
+    <?php
+      echo "<form action='homeplaylist.php'>";
+      echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
+      echo "</form>";
+    ?>
 
     <table class="table">
     <thead>

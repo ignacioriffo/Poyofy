@@ -33,14 +33,23 @@ $playlists = $user->getPlaylistsCreadas();
   <body>
     <nav class="nav">
 	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
-    <a class="nav-link disabled" href="#"  aria-disabled="true">Playlist Creadas</a>
-	<a class="nav-link" href="home.php">Volver</a>
+  <a class="nav-link" href="homeplaylist.php">Playlist</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
 	</nav>
     <div class="container">
-    <h1>Playlist Creadas</h1>
+    <h3>Playlist Creadas</h3>
     <?php
-    	echo "<form action='playlistsongscreadas.php' method='post'>";
+        echo "<form action='home.php'>";
+        echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
+        echo "<br>";
+        echo "</form>";
+        
+        echo "<form action='crearplaylist.php'>";
+        echo "<button type='submit' class='btn btn-link' name='crearplaylist'>Crear playlist</button>";
+        echo "<br>";
+        echo "</form>";
+
+        echo "<form action='playlistsongscreadas.php' method='post'>";
         foreach($playlists as $playlist){
             $playlistname = $playlist->getNombre();
             $playlistid = $playlist->getId();
@@ -48,11 +57,6 @@ $playlists = $user->getPlaylistsCreadas();
             echo "<br>";
         }
         echo "</form>";
-
-        echo "<form action='crearplaylist.php'>";
-        echo "<button type='submit' class='btn btn-link' name='crearplaylist'>Crear playlist</button>";
-        echo "<br>";
-
     ?>
     </div>
     <!-- Optional JavaScript -->

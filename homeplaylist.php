@@ -28,12 +28,14 @@ $playlists = $user->getPlaylists();
   <nav class="nav">
 	<a class="nav-link disabled" href="#"  aria-disabled="true"> <?php echo $user->getNombre(); ?></a>
 	<a class="nav-link disabled" href="homeplaylist.php">Playlist</a>
-	<a class="nav-link" href="home.php">Volver</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
 	</nav>
   <div class="container">
   <h3>Playlists</h3>
 	<?php
+  echo "<form action='home.php'>";
+  echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
+  echo "</form>";
 
 	echo "<form action='playlistsongs.php' method='post'>";
 	foreach($playlists as $playlist){
