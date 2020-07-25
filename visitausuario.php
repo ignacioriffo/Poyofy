@@ -13,7 +13,7 @@ $user = $_SESSION['user'];
 $uservisita = new User();
 if(isset($_POST['seguido'])){
     $idseguido = $_POST['seguido'];
-    $uservisita->setUserId($idseguido);
+    $uservisita->setUser("",$idseguido);
 }
 ?>
 <!doctype html>

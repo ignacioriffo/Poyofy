@@ -13,7 +13,7 @@ if(isset($_SESSION['user'])){
 
 	if($user->userExists($userForm, $passForm)){
 		$user = new User();
-		$user->setUser($userForm);
+		$user->setUser($userForm, "");
 		$_SESSION['user'] = $user;
 
 		header("location: home.php");

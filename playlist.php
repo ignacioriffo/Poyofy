@@ -33,7 +33,7 @@ class Playlist extends DB{
 		foreach ($query as $currentUser){
 			$nseguidores++;
 			$seguidor = new User();
-			$seguidor->setUserId($currentUser['id_user']);
+			$seguidor->setUser("",$currentUser['id_user']);
 			array_push($this->seguidores,$seguidor);
 		}
 		$this->num_seguidores = $nseguidores;

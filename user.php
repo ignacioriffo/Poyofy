@@ -59,7 +59,7 @@ class User extends DB{
 		$seguidos = array();
 		foreach($query as $currentId){
 			$seguido = new User();
-			$seguido->setUserId($currentId['id_user']);
+			$seguido->setUser("",$currentId['id_user']);
 			array_push($seguidos,$seguido);
 		}
 		$this->seguidos = $seguidos;
@@ -134,9 +134,14 @@ class User extends DB{
 		}
 	}
 
-	public function setUser($user){
-		$query = $this->connect()->prepare('SELECT * FROM personas WHERE username = :user');
-		$query->execute(['user' => $user]);
+	public function setUser($user = "", $id = ""){
+		if($id == ""){
+			$query = $this->connect()->prepare('SELECT * FROM personas WHERE username = :user');
+			$query->execute(['user' => $user]);
+		}else{
+			$query = $this->connect()->prepare('SELECT * FROM personas WHERE id_user = :id');
+			$query->execute(['id' => $id]);
+		}
 
 		foreach ($query as $currentUser) {
 			$this->id_user = $currentUser['id_user'];
@@ -173,47 +178,6 @@ class User extends DB{
 			}
 		}
 	}
-
-	public function setUserId($id){
-		$query = $this->connect()->prepare('SELECT * FROM personas WHERE id_user = :id');
-		$query->execute(['id' => $id]);
-
-		foreach ($query as $currentUser) {
-			$this->id_user = $currentUser['id_user'];
-			$this->username = $currentUser['username'];
-			$this->playlists = array();
-			$this->currPlaylist = new Playlist();
-			$this->isartista = false;
-			$this->seguidos = array();
-
-			$query = $this->connect()->prepare('SELECT * FROM  artistas WHERE id_user = :id');
-			$query->execute(['id' => $currentUser['id_user']]);
-
-			if($query->rowCount()){
-				$this->isartista = true;
-			}
-			
-			if($this->isartista){
-				$query = $this->connect()->prepare('SELECT biografia FROM artistas WHERE id_user = :id');
-				$query->execute(['id' => $this->id_user]);
-		
-				foreach ($query as $currentUser){
-					$this->biografia = $currentUser['biografia'];
-				}
-
-			}
-
-			$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
-			$query->execute(['id' => $this->id_user]);
-			
-			foreach($query as $currentId){
-				$playlist = new Playlist();
-				$playlist->setPlaylist($currentId['id_playlist']);
-				array_push($this->playlists,$playlist);
-			}
-		}
-	}
-
 
 	public function getNombre(){
 		return $this->username;
