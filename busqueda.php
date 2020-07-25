@@ -18,6 +18,21 @@ if(isset($_POST['busqueda'])){
     $canciones = $listabusqueda[0];
     $playlists = $listabusqueda[1];
     $personas = $listabusqueda[2];
+
+    $usuarios = array();
+    $artistas = array();
+
+    foreach($personas as $personaid){
+      $persona = new User();
+      $persona->setUser("", $personaid);
+
+      if($persona->getIsArtista()){
+        array_push($artistas,$persona);
+      }else{
+        array_push($usuarios,$persona);
+      }
+    }
+
 }
 
 
@@ -94,6 +109,56 @@ if(isset($_POST['busqueda'])){
         echo "<tr>";
         echo "<td>" . $playlist->getNombre() . "</td>";
         echo "<td>" . $playlist->getCreador() . "</td>";
+        echo "</tr>";
+        if($index == 4){
+          break;
+        }
+        $index++;
+      }
+    ?>
+    
+    </tbody>
+    </table>
+
+    <br>
+    <h3>Artistas</h3>
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+      $index = 0;
+      foreach($artistas as $artista){
+        echo "<tr>";
+        echo "<td>" . $artista->getNombre() . "</td>";
+        echo "</tr>";
+        if($index == 4){
+          break;
+        }
+        $index++;
+      }
+    ?>
+    
+    </tbody>
+    </table>
+
+    <br>
+    <h3>Usuarios</h3>
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+      $index = 0;
+      foreach($usuarios as $usuario){
+        echo "<tr>";
+        echo "<td>" . $usuario->getNombre() . "</td>";
         echo "</tr>";
         if($index == 4){
           break;
