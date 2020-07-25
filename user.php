@@ -58,6 +58,19 @@ class User extends DB{
 	public function crearPlaylist($nombre, $descripcion){
 		$query = $this->connect()->prepare('INSERT INTO `playlists`(`id_user`, `nombre`, `descripcion`) VALUES (:id,:nombre,:descripcion)');
 		$query->execute(['id' => $this->id_user, 'nombre' => $nombre, 'descripcion' => $descripcion]);
+
+
+		$datos = $this->connect()->prepare('SELECT MAX(id_playlist) FROM `playlists`');
+		$datos->execute();
+
+		$id = 0;
+		foreach($datos as $newPlaylist){
+			$id = $newPlaylist[0];
+		}
+
+		
+		$query = $this->connect()->prepare('INSERT INTO `personas_playlists`(`id_user`, `id_playlist`) VALUES (:iduser,:idplaylist)');
+		$query->execute(['iduser' => $this->id_user, 'idplaylist' => $id]);
 	}
 	
 	public function getPlaylistsCreadas(){
@@ -134,6 +147,15 @@ class User extends DB{
 	}
 
 	public function getPlaylists(){
+		$this->playlists = array();
+		$query = $this->connect()->prepare('SELECT id_playlist FROM personas_playlists WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		
+		foreach($query as $currentId){
+			$playlist = new Playlist();
+			$playlist->setPlaylist($currentId['id_playlist']);
+			array_push($this->playlists,$playlist);
+		}
 		return $this->playlists;
 	}
 
