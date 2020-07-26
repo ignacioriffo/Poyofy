@@ -98,6 +98,7 @@ if(isset($_POST['busqueda'])){
     <tr>
       <th scope="col">Nombre</th>
       <th scope="col">Creador</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -109,6 +110,7 @@ if(isset($_POST['busqueda'])){
         echo "<tr>";
         echo "<td>" . $playlist->getNombre() . "</td>";
         echo "<td>" . $playlist->getCreador() . "</td>";
+        echo '<td><button type="button" class="btn btn-success">Añadir</button></td>';
         echo "</tr>";
         if($index == 4){
           break;
