@@ -14,7 +14,20 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
-	function searchSongs($string){
+	public function seguirPlaylist($playlistagregada){
+		$query = $this->connect()->prepare('SELECT * FROM personas_playlists WHERE id_user = :id AND id_playlist = :idp');
+		$query->execute(['id' => $this->id_user, 'idp' => $playlistagregada]);
+
+		foreach($query as $current){
+			return;
+		}
+
+		$query = $this->connect()->prepare('INSERT INTO `personas_playlists`(`id_user`, `id_playlist`) VALUES (:iduser,:idplaylist)');
+		$query->execute(['iduser' => $this->id_user, 'idplaylist' => $playlistagregada]);
+
+	}
+
+	public function searchSongs($string){
         $query = $string;
         $min_length = 1;
         // you can set minimum length of the query if you want

@@ -12,6 +12,11 @@ $user = $_SESSION['user'];
 
 $canciones = array();
 
+if(isset($_POST['seguirPlaylist'])){
+  $playlistagregada = $_POST['seguirPlaylist'];
+  $user->seguirPlaylist($playlistagregada);
+}
+
 if(isset($_POST['busqueda'])){
     $busqueda = $_POST['busqueda'];
     $listabusqueda = $user->searchSongs($busqueda);
@@ -110,7 +115,10 @@ if(isset($_POST['busqueda'])){
         echo "<tr>";
         echo "<td>" . $playlist->getNombre() . "</td>";
         echo "<td>" . $playlist->getCreador() . "</td>";
-        echo '<td><button type="button" class="btn btn-success">Añadir</button></td>';
+        echo "<form action='busqueda.php'  method='post'>";
+        echo '<td><button type="sumbit" name="seguirPlaylist" value="' . $playlist->getId() . '" class="btn btn-success">Seguir</button></td>';
+        echo '<input type="hidden" name="busqueda" value="' . $busqueda . '">';
+        echo "</form>";
         echo "</tr>";
         if($index == 4){
           break;

@@ -13,7 +13,7 @@ if(isset($_POST['playlist']) && isset($_POST['descripcion'])){
 	$playlistForm = $_POST['playlist'];
     $descripcionForm = $_POST['descripcion'];
 
-    $playlistcreada = "Cuenta creada correctamente!";
+    $playlistcreada = "Playlist creada correctamente!";
     $user->crearPlaylist($playlistForm, $descripcionForm);
 }
 ?>
