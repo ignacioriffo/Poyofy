@@ -11,7 +11,7 @@ $user = $_SESSION['user'];
 
 if(isset($_POST['borrarplaylist'])){
     $user->borrarPlaylist($_POST['borrarplaylist']);
-    $playlistcreada = "Borrado correctamente!";
+    //$playlistcreada = "Borrado correctamente!";
 }
 
 
