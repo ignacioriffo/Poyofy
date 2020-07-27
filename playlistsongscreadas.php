@@ -84,6 +84,7 @@ $canciones = $playlist->getCanciones();
         echo '<th scope="col">Nombre</th>';
         echo '<th scope="col">Artista</th>';
         echo '<th scope="col">Duración</th>';
+        echo '<th scope="col"></th>';
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
