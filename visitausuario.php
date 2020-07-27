@@ -7,9 +7,13 @@ if(!isset($_SESSION['user'])){
   header('Location: login.php');
 }
 
-
 $user = new User();
 $user = $_SESSION['user'];
+
+if(isset($_POST['gustarCancion'])){
+  $cancionagregada = $_POST['gustarCancion'];
+  $user->megustaCancion($cancionagregada);
+}
 
 if(isset($_POST['seguirPlaylist'])){
   $playlistagregada = $_POST['seguirPlaylist'];
@@ -23,6 +27,7 @@ if(isset($_POST['seguido'])){
 }
 
 $playlists = $uservisita->getPlaylists();
+$canciones = $uservisita->getCanciones();
 ?>
 <!doctype html>
 <html lang="en">
@@ -59,11 +64,45 @@ $playlists = $uservisita->getPlaylists();
     <form action='userseguidos.php'>
     <button type='submit' class='btn btn-link' name='volver'>Volver</button>
     </form>
+    <br>
+    <h3>Canciones</h3>
+
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Artista</th>
+      <th scope="col">Duración</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+      $index = 0;
+      foreach($canciones as $cancion){
+        echo "<tr>";
+        echo "<td>" . $cancion->getNombre() . "</td>";
+        echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<td>" . $cancion->getDuracion() . "</td>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo '<td><button type="sumbit" name="gustarCancion" value="' . $cancion->getId() . '" class="btn btn-success">Me Gusta</button></td>';
+        echo '<input type="hidden" name="seguido" value="' . $uservisita->getId() . '">';
+        echo "</form>";
+        echo "</tr>";
+        if($index == 4){
+          break;
+        }
+        $index++;
+      }
+    ?>
+    
+    </tbody>
+    </table>
+    
 
     </tbody>
     </table>
     
-    <br>
     <h3>Playlists</h3>
     <table class="table">
     <thead>
@@ -95,6 +134,7 @@ $playlists = $uservisita->getPlaylists();
     </tbody>
     </table>
     </div>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

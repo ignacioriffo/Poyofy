@@ -87,6 +87,7 @@ if(isset($_POST['busqueda'])){
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
       <th scope="col">Duración</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
