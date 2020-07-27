@@ -28,6 +28,7 @@ $seguidos = $user->getSeguidos()
   <body>
   <nav class="navbar navbar-light bg-light justify-content-between">
   <a class="nav-link" href="home.php"><?php echo $user->getNombre(); ?></a>
+  <a class="nav-link" href="homecanciones.php">Canciones</a>
 	<a class="nav-link" href="homeplaylist.php">Playlist</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
   <form class="form-inline" action='busqueda.php' method='post'>
