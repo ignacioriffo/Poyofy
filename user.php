@@ -14,6 +14,31 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function megustaCancion($cancionid){
+		$query = $this->connect()->prepare('SELECT * FROM usuarios_canciones WHERE id_user = :id AND id_cancion = :idc');
+		$query->execute(['id' => $this->id_user, 'idc' => $cancionid]);
+
+		foreach($query as $current){
+			return;
+		}
+
+		$query = $this->connect()->prepare('INSERT INTO `usuarios_canciones`(`id_user`, `id_cancion`) VALUES (:iduser,:idc)');
+		$query->execute(['iduser' => $this->id_user, 'idc' => $cancionid]);
+	}
+
+	public function getCanciones(){
+		$query = $this->connect()->prepare('SELECT id_cancion FROM usuarios_canciones WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		$canciones = array();
+
+		foreach($query as $currentId){
+			$cancion = new Cancion();
+			$cancion->setCancion($currentId['id_cancion']);
+			array_push($canciones,$cancion);
+		}
+		return $canciones;
+	}
+
 	public function dejarSeguirPlaylist($playlist){
 		$query = $this->connect()->prepare('DELETE FROM `personas_playlists` WHERE id_user = :id AND id_playlist = :idp');
 		$query->execute(['id' => $this->id_user, 'idp' => $playlist]);

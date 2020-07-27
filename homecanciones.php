@@ -9,6 +9,8 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+$canciones = $user->getCanciones();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -35,6 +37,31 @@ $user = $_SESSION['user'];
     </nav>
     <div class="container">
     <h3>Canciones</h3>
+    
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Artista</th>
+      <th scope="col">Duración</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+      $nsong = 1;
+      foreach($canciones as $cancion){
+        echo "<tr>";
+        echo "<th scope='row'>" . $nsong . "</th>";
+        echo "<td>" . $cancion->getNombre() . "</td>";
+        echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<td>" . $cancion->getDuracion() . "</td>";
+        echo "</tr>";
+        $nsong++;
+      }
+    ?>
+    </tbody>
+    </table>
     </div>
 
 
