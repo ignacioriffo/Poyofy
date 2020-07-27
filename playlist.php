@@ -10,6 +10,19 @@ class Playlist extends DB{
 	private $seguidores;
 	private $num_seguidores;
 	private $canciones;
+
+	public function añadirCancion($cancionid){
+		$query = $this->connect()->prepare('SELECT * FROM `playlists_canciones` WHERE id_playlist = :id AND id_cancion = :idc');
+		$query->execute(['id' => $this->id_playlist, 'idc' => $cancionid]);
+
+		foreach($query as $current){
+			return;
+		}
+
+		$query = $this->connect()->prepare('INSERT INTO `playlists_canciones`(`id_playlist`, `id_cancion`) VALUES (:id,:idc)');
+		$query->execute(['id' => $this->id_playlist, 'idc' => $cancionid]);
+
+	}
 	
 	public function getCreador(){
 		$query = $this->connect()->prepare('SELECT * FROM personas WHERE id_user = :id');
@@ -22,6 +35,16 @@ class Playlist extends DB{
 	}
 
 	public function getCanciones(){
+		$this->canciones = array();
+		$query = $this->connect()->prepare('SELECT * FROM playlists_canciones WHERE id_playlist = :id');
+		$query->execute(['id' => $this->id_playlist]);
+
+		foreach ($query as $currentCancion){
+			$cancion = new Cancion();
+			$cancion->setCancion($currentCancion['id_cancion']);
+			array_push($this->canciones,$cancion);
+
+		}
 		return $this->canciones;
 	}
 

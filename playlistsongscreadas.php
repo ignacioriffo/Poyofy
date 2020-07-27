@@ -15,11 +15,17 @@ if(isset($_POST['playlist'])){
     $playlistid = $_POST['playlist'];
     $playlist->setPlaylist($playlistid);
     $playlist->setSeguidores();
-    $user->setCurrPlaylist($playlist);
+}
 
-    $_SESSION['user'] = $user;
-}else{
-    $playlist = $user->getCurrPlaylist();
+if(isset($_POST['busqueda'])){
+  $cancionbuscada = $_POST['busqueda'];
+  $listabusqueda = $user->searchSongs($cancionbuscada);
+  $cancionesbuscadas = $listabusqueda[0];
+}
+
+if(isset($_POST['añadirCancion'])){
+  $cancionañadida = $_POST['añadirCancion'];
+  $playlist->añadirCancion($cancionañadida);
 }
 
 $canciones = $playlist->getCanciones();
@@ -58,7 +64,50 @@ $canciones = $playlist->getCanciones();
       echo "<form action='playlistcreadas.php'>";
       echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
       echo "</form>";
+    
+      echo '<form class="form-inline" action="playlistsongscreadas.php" method="post">';
+      echo '<input class="form-control mr-sm-2" type="search" placeholder="Ingrese cancion" aria-label="Search"  name="busqueda">';
+      echo '<input type="hidden" name="playlist" value="' . $playlistid . '">';
+      echo '<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>';
+      echo '</form>';
+
+      if(isset($_POST['busqueda'])){
+        echo '<br>';
+        echo '<table class="table">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th scope="col">Nombre</th>';
+        echo '<th scope="col">Artista</th>';
+        echo '<th scope="col">Duración</th>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+        
+        $index = 0;
+        foreach($cancionesbuscadas as $cancionid){
+          $cancion = new Cancion();
+          $cancion->setCancion($cancionid);
+          echo "<tr>";
+          echo "<td>" . $cancion->getNombre() . "</td>";
+          echo "<td>" . $cancion->getCreador() . "</td>";
+          echo "<td>" . $cancion->getDuracion() . "</td>";
+          echo "<form action='playlistsongscreadas.php'  method='post'>";
+          echo '<td><button type="sumbit" name="añadirCancion" value="' . $cancion->getId() . '" class="btn btn-success">Añadir</button></td>';
+          echo '<input type="hidden" name="playlist" value="' . $playlistid . '">';
+          echo "</form>";
+          echo "</tr>";
+          if($index == 4){
+            break;
+          }
+          $index++;
+        }
+        
+        echo '</tbody>';
+        echo '</table>';
+
+      }
     ?>
+    <br>
 
     <table class="table">
     <thead>
