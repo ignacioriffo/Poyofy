@@ -58,7 +58,7 @@ $canciones = $playlist->getCanciones();
     <?php
       echo "<form action='homeplaylist.php'  method='post'>";
       echo "<button type='submit' class='btn btn-link' name='dejarseguir' value='" . $playlist->getId() . "'>Dejar de seguir</button>";
-      echo "<br>";
+      echo "</form>";
     
       echo "<form action='homeplaylist.php'>";
       echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";

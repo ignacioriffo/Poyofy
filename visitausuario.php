@@ -51,6 +51,11 @@ $playlists = $uservisita->getPlaylists();
     <h3><?php echo $uservisita->getNombre(); ?></h3>
     <p6><?php echo $uservisita->getSeguidores() . " "; ?>Seguidores</p6>
 
+    <?php
+    echo "<form action='userseguidos.php'  method='post'>";
+    echo "<button type='submit' class='btn btn-link' name='dejarseguir' value='" . $uservisita->getId() . "'>Dejar de seguir</button>";
+    echo "</form>";
+    ?>
     <form action='userseguidos.php'>
     <button type='submit' class='btn btn-link' name='volver'>Volver</button>
     </form>

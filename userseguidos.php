@@ -9,8 +9,15 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['dejarseguir'])){
+  $user->dejarSeguirUsuario($_POST['dejarseguir']);
+  //$playlistcreada = "Borrado correctamente!";
+}
+
 $user->setSeguidos();
-$seguidos = $user->getSeguidos()
+$seguidos = $user->getSeguidos();
+
+
 
 ?>
 <!doctype html>

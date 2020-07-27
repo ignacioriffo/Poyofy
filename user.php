@@ -44,6 +44,11 @@ class User extends DB{
 		$query->execute(['id' => $this->id_user, 'idp' => $playlist]);
 	}
 
+	public function dejarSeguirUsuario($usuarioid){
+		$query = $this->connect()->prepare('DELETE FROM `personas_personas` WHERE id_user = :id AND id_seguidor = :ids');
+		$query->execute(['id' => $usuarioid, 'ids' => $this->id_user]);
+	}
+
 	public function seguirUsuario($usuarioagregado){
 		$query = $this->connect()->prepare('SELECT * FROM personas_personas WHERE id_user = :id AND id_seguidor = :ids');
 		$query->execute(['id' => $usuarioagregado, 'ids' => $this->id_user]);
