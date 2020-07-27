@@ -10,16 +10,16 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['gustarCancion'])){
+  $cancionagregada = $_POST['gustarCancion'];
+  $user->megustaCancion($cancionagregada);
+}
+
 $playlist = new Playlist();
 if(isset($_POST['playlist'])){
     $playlistid = $_POST['playlist'];
     $playlist->setPlaylist($playlistid);
     $playlist->setSeguidores();
-    $user->setCurrPlaylist($playlist);
-
-    $_SESSION['user'] = $user;
-}else{
-    $playlist = $user->getCurrPlaylist();
 }
 
 $canciones = $playlist->getCanciones();
@@ -72,6 +72,7 @@ $canciones = $playlist->getCanciones();
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
       <th scope="col">Duración</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -83,6 +84,10 @@ $canciones = $playlist->getCanciones();
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
+        echo "<form action='playlistsongs.php'  method='post'>";
+        echo '<td><button type="sumbit" name="gustarCancion" value="' . $cancion->getId() . '" class="btn btn-success">Me Gusta</button></td>';
+        echo '<input type="hidden" name="playlist" value="' . $playlist->getId() . '">';
+        echo "</form>";
         echo "</tr>";
         $nsong++;
       }
