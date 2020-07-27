@@ -11,6 +11,12 @@ class Playlist extends DB{
 	private $num_seguidores;
 	private $canciones;
 
+	public function borrarCancion($cancionid){
+		$query = $this->connect()->prepare('DELETE FROM `playlists_canciones` WHERE id_playlist = :id AND id_cancion = :idc');
+		$query->execute(['id' => $this->id_playlist, 'idc' => $cancionid]);
+
+	}
+
 	public function añadirCancion($cancionid){
 		$query = $this->connect()->prepare('SELECT * FROM `playlists_canciones` WHERE id_playlist = :id AND id_cancion = :idc');
 		$query->execute(['id' => $this->id_playlist, 'idc' => $cancionid]);

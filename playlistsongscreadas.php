@@ -28,6 +28,11 @@ if(isset($_POST['añadirCancion'])){
   $playlist->añadirCancion($cancionañadida);
 }
 
+if(isset($_POST['borrar'])){
+  $cancionid = $_POST['borrar'];
+  $playlist->borrarCancion($cancionid);
+}
+
 $canciones = $playlist->getCanciones();
 ?>
 
@@ -116,6 +121,7 @@ $canciones = $playlist->getCanciones();
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
       <th scope="col">Duración</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -127,6 +133,10 @@ $canciones = $playlist->getCanciones();
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
+        echo "<form action='playlistsongscreadas.php'  method='post'>";
+        echo '<td><button type="sumbit" name="borrar" value="' . $cancion->getId() . '" class="btn btn-light">Borrar</button></td>';
+        echo '<input type="hidden" name="playlist" value="' . $playlistid . '">';
+        echo "</form>";
         echo "</tr>";
         $nsong++;
       }
