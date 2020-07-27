@@ -62,7 +62,7 @@ class Playlist extends DB{
 			$this->canciones = array();
 		}
 
-		$query = $this->connect()->prepare('SELECT * FROM canciones_playlist WHERE id_playlist = :id');
+		$query = $this->connect()->prepare('SELECT * FROM playlists_canciones WHERE id_playlist = :id');
 		$query->execute(['id' => $id_playlist]);
 
 		foreach ($query as $currentCancion){
