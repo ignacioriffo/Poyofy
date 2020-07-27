@@ -6,6 +6,9 @@ session_start();
 if(!isset($_SESSION['user'])){
   header('Location: login.php');
 }
+if(!isset($_POST['busqueda'])){
+  header('Location: home.php');
+}
 
 $user = new User();
 $user = $_SESSION['user'];
@@ -15,6 +18,11 @@ $canciones = array();
 if(isset($_POST['seguirPlaylist'])){
   $playlistagregada = $_POST['seguirPlaylist'];
   $user->seguirPlaylist($playlistagregada);
+}
+
+if(isset($_POST['seguirUsuario'])){
+  $usuarioagregado = $_POST['seguirUsuario'];
+  $user->seguirUsuario($usuarioagregado);
 }
 
 if(isset($_POST['busqueda'])){
@@ -136,6 +144,7 @@ if(isset($_POST['busqueda'])){
     <thead>
     <tr>
       <th scope="col">Nombre</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -144,6 +153,10 @@ if(isset($_POST['busqueda'])){
       foreach($artistas as $artista){
         echo "<tr>";
         echo "<td>" . $artista->getNombre() . "</td>";
+        echo "<form action='busqueda.php'  method='post'>";
+        echo '<td><button type="sumbit" name="seguirUsuario" value="' . $artista->getId() . '" class="btn btn-success">Seguir</button></td>';
+        echo '<input type="hidden" name="busqueda" value="' . $busqueda . '">';
+        echo "</form>";
         echo "</tr>";
         if($index == 4){
           break;
@@ -161,6 +174,7 @@ if(isset($_POST['busqueda'])){
     <thead>
     <tr>
       <th scope="col">Nombre</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -169,6 +183,10 @@ if(isset($_POST['busqueda'])){
       foreach($usuarios as $usuario){
         echo "<tr>";
         echo "<td>" . $usuario->getNombre() . "</td>";
+        echo "<form action='busqueda.php'  method='post'>";
+        echo '<td><button type="sumbit" name="seguirUsuario" value="' . $usuario->getId() . '" class="btn btn-success">Seguir</button></td>';
+        echo '<input type="hidden" name="busqueda" value="' . $busqueda . '">';
+        echo "</form>";
         echo "</tr>";
         if($index == 4){
           break;

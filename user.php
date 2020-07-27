@@ -14,6 +14,19 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function seguirUsuario($usuarioagregado){
+		$query = $this->connect()->prepare('SELECT * FROM personas_personas WHERE id_user = :id AND id_seguidor = :ids');
+		$query->execute(['id' => $usuarioagregado, 'ids' => $this->id_user]);
+
+		foreach($query as $current){
+			return;
+		}
+
+		$query = $this->connect()->prepare('INSERT INTO `personas_personas`(`id_user`, `id_seguidor`) VALUES (:id,:ids)');
+		$query->execute(['id' => $usuarioagregado, 'ids' => $this->id_user]);
+
+	}
+
 	public function seguirPlaylist($playlistagregada){
 		$query = $this->connect()->prepare('SELECT * FROM personas_playlists WHERE id_user = :id AND id_playlist = :idp');
 		$query->execute(['id' => $this->id_user, 'idp' => $playlistagregada]);
