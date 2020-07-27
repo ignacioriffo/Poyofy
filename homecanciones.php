@@ -9,6 +9,11 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['nomegusta'])){
+  $cancionid = $_POST['nomegusta'];
+  $user->nomegustaCancion($cancionid);
+}
+
 $canciones = $user->getCanciones();
 
 ?>
@@ -45,6 +50,7 @@ $canciones = $user->getCanciones();
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
       <th scope="col">Duración</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -56,6 +62,9 @@ $canciones = $user->getCanciones();
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
+        echo "<form action='homecanciones.php'  method='post'>";
+        echo '<td><button type="sumbit" name="nomegusta" value="' . $cancion->getId() . '" class="btn btn-light">Borrar</button></td>';
+        echo "</form>";
         echo "</tr>";
         $nsong++;
       }

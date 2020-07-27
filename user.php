@@ -14,6 +14,11 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function nomegustaCancion($cancionid){
+		$query = $this->connect()->prepare('DELETE FROM `usuarios_canciones` WHERE id_user = :id AND id_cancion = :idc');
+		$query->execute(['id' => $this->id_user, 'idc' => $cancionid]);
+	}
+
 	public function megustaCancion($cancionid){
 		$query = $this->connect()->prepare('SELECT * FROM usuarios_canciones WHERE id_user = :id AND id_cancion = :idc');
 		$query->execute(['id' => $this->id_user, 'idc' => $cancionid]);
