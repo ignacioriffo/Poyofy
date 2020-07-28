@@ -39,13 +39,10 @@ $user = $_SESSION['user'];
 	<p6><?php echo $user->getSeguidores() . " Seguidores"?></p6>
 	<h6><?php
   
-		if($user->getIsArtista()){
-    echo "<form action='homebiografia.php'>";
-    echo "<button type='submit' class='btn btn-link' name='biografia'>Biografia</button>";
+    echo "<form action='editarperfil.php'>";
+    echo "<button type='submit' class='btn btn-link' name='editarperfil'>Editar perfil</button>";
     echo "<br>";
     echo "</form>";
-    //echo $user->getBiografia() . "<br>";
-    }
     
     echo "<form action='userseguidos.php'>";
     echo "<button type='submit' class='btn btn-link' name='seguidos'>Seguidos</button>";

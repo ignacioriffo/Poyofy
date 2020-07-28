@@ -25,6 +25,7 @@ $user = $_SESSION['user']
   <body>
   <nav class="navbar navbar-light bg-light justify-content-between">
   <a class="nav-link" href="home.php"><?php echo $user->getNombre(); ?></a>
+  <a class="nav-link" href="homecanciones.php">Canciones</a>
 	<a class="nav-link" href="homeplaylist.php">Playlist</a>
 	<a class="nav-link" href="logout.php">Cerrar sesión</a>
   <form class="form-inline" action='busqueda.php' method='post'>
@@ -33,28 +34,31 @@ $user = $_SESSION['user']
   </form>
   </nav>
     <div class="container">
-        <h6><?php echo "Biografia: " . $user->getBiografia();?></h6>
+    <h3>Perfil</h3>
+    <h3>Nombre de usuario</h3>
 
-        <form action="" method="POST">
-        <div class="form-group">
-        <label for="exampleFormControlTextarea1">Editar Biografia</label>
-        <textarea class="form-control" name="newbiografia" id="newbiografia" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
 
-        <?php
-        echo "<form action='home.php'>";
-        echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
-        echo "</form>";
+    <?php
+      if($user->getIsArtista()){
+        echo '<h3>Biografia</h3>';
+        echo "<h6>" . $user->getBiografia() . "</h6>";
+
+        echo '<form action="" method="POST">';
+        echo '<div class="form-group">';
+        echo '<label for="exampleFormControlTextarea1">Editar Biografia</label>';
+        echo '<textarea class="form-control" name="newbiografia" id="newbiografia" rows="3"></textarea>';
+        echo '</div>';
+        echo '<button type="submit" class="btn btn-primary">Enviar</button>';
+        echo '</form>';
 
         if(isset($_POST['newbiografia'])){
             $user->editarBiografia($_POST['newbiografia']);
             header("location: homebiografia.php");
         }
-        ?>
-    </div>
-
+        
+        echo '</div>';
+      }
+    ?>
 
 
     <!-- Optional JavaScript -->
