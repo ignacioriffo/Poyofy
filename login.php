@@ -36,8 +36,8 @@
 		<input type="password" class="form-control" name="password" id="password" placeholder="Ingrese Contraseña">
 	</div>
 	<button type="submit" class="btn btn-primary">Enviar</button>
-	</form>
 	</div>
+	</form>
 	<?php
 		$db = new DB();
 		$db->connect();

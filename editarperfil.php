@@ -7,7 +7,21 @@ if(!isset($_SESSION['user'])){
 }
 
 $user = new User();
-$user = $_SESSION['user']
+$user = $_SESSION['user'];
+
+if(isset($_POST['newbiografia'])){
+  $user->editarBiografia($_POST['newbiografia']);
+}
+
+if(isset($_POST['username'])){
+  echo "uwu username";
+  //$user->editarBiografia($_POST['newbiografia']);
+}
+
+if(isset($_POST['password'])){
+  echo "uwu password";
+  //$user->editarBiografia($_POST['newbiografia']);
+}
 
 ?>
 <!doctype html>
@@ -35,28 +49,42 @@ $user = $_SESSION['user']
   </nav>
     <div class="container">
     <h3>Perfil</h3>
-    <h3>Nombre de usuario</h3>
+    <br>
 
+    <h3>Nombre de usuario</h3>
+    <p6><?php echo $user->getNombre(); ?></p6>
+    <form action="editarperfil.php" method="POST">
+    <div class="form-group">
+    <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Ingrese Nombre">
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    <br>
+    <br>
+
+    <h3>Contraseña</h3>
+    <form action="editarperfil.php" method="POST">
+    <div class="form-group">
+    <input type="text" class="form-control" name="password" id="password" placeholder="Ingrese Contraseña">
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    <br>
+    <br>
 
     <?php
       if($user->getIsArtista()){
         echo '<h3>Biografia</h3>';
         echo "<h6>" . $user->getBiografia() . "</h6>";
 
-        echo '<form action="" method="POST">';
+        echo '<form action="editarperfil.php" method="POST">';
         echo '<div class="form-group">';
         echo '<label for="exampleFormControlTextarea1">Editar Biografia</label>';
         echo '<textarea class="form-control" name="newbiografia" id="newbiografia" rows="3"></textarea>';
         echo '</div>';
         echo '<button type="submit" class="btn btn-primary">Enviar</button>';
-        echo '</form>';
-
-        if(isset($_POST['newbiografia'])){
-            $user->editarBiografia($_POST['newbiografia']);
-            header("location: homebiografia.php");
-        }
-        
         echo '</div>';
+        echo '</form>';
       }
     ?>
 
