@@ -336,8 +336,24 @@ class User extends DB{
 		}
 	}
 
+	public function editarPass($newPass){
+		$query = $this->connect()->prepare('UPDATE personas SET password = :pass WHERE id_user = :id');
+		$query->execute(['pass' => $newPass, 'id' => $this->id_user]);
+		return "Contraseña cambiada correctamente!";
+	}
+
 	public function getNombre(){
 		return $this->username;
+	}
+
+	public function editarNombre($newNombre){
+		if($this->registroExists($newNombre)){
+			return "Nombre no disponible!";
+		}
+		$query = $this->connect()->prepare('UPDATE personas SET username = :nombre WHERE id_user = :id');
+		$query->execute(['nombre' => $newNombre, 'id' => $this->id_user]);
+		$this->username = $newNombre;
+		return "Nombre cambiado correctamente!";
 	}
 
 	public function getId(){

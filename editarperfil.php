@@ -14,13 +14,11 @@ if(isset($_POST['newbiografia'])){
 }
 
 if(isset($_POST['username'])){
-  echo "uwu username";
-  //$user->editarBiografia($_POST['newbiografia']);
+  $infoname = $user->editarNombre($_POST['username']);
 }
 
 if(isset($_POST['password'])){
-  echo "uwu password";
-  //$user->editarBiografia($_POST['newbiografia']);
+  $infopass = $user->editarPass($_POST['password']);
 }
 
 ?>
@@ -52,6 +50,12 @@ if(isset($_POST['password'])){
     <br>
 
     <h3>Nombre de usuario</h3>
+    <?php
+		if(isset($infoname)){
+            echo $infoname;
+            echo "<br>";
+		}
+	  ?>
     <p6><?php echo $user->getNombre(); ?></p6>
     <form action="editarperfil.php" method="POST">
     <div class="form-group">
@@ -63,6 +67,11 @@ if(isset($_POST['password'])){
     <br>
 
     <h3>Contraseña</h3>
+    <?php
+		if(isset($infopass)){
+            echo $infopass;
+		}
+	  ?>
     <form action="editarperfil.php" method="POST">
     <div class="form-group">
     <input type="text" class="form-control" name="password" id="password" placeholder="Ingrese Contraseña">
