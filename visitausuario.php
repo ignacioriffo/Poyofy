@@ -84,10 +84,15 @@ $canciones = $uservisita->getCanciones();
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
-        echo "<form action='visitausuario.php'  method='post'>";
-        echo '<td><button type="sumbit" name="gustarCancion" value="' . $cancion->getId() . '" class="btn btn-success">Me Gusta</button></td>';
-        echo '<input type="hidden" name="seguido" value="' . $uservisita->getId() . '">';
-        echo "</form>";
+
+        if(!$user->getIsArtista()){
+          echo "<form action='visitausuario.php'  method='post'>";
+          echo '<td><button type="sumbit" name="gustarCancion" value="' . $cancion->getId() . '" class="btn btn-success">Me Gusta</button></td>';
+          echo '<input type="hidden" name="seguido" value="' . $uservisita->getId() . '">';
+          echo "</form>";
+        }else{
+          echo "<td></td>";
+        }
         echo "</tr>";
         if($index == 4){
           break;
