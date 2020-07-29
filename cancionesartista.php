@@ -9,6 +9,11 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['borrar'])){
+    $user->borrarCancion($_POST['borrar']);
+}
+  
+
 $canciones = $user->getCancionesArtista();
 
 ?>
