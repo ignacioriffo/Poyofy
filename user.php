@@ -14,6 +14,30 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function editarFechaCancion($fecha, $idc){
+		$query = $this->connect()->prepare('UPDATE `canciones` SET `fecha`= :fecha WHERE id_cancion = :id');
+		$query->execute(['fecha' => $fecha, 'id' => $idc]);
+		
+	}
+
+	public function editarDuracionCancion($duracion, $idc){
+		$query = $this->connect()->prepare('UPDATE `canciones` SET `duracion`= :duracion WHERE id_cancion = :id');
+		$query->execute(['duracion' => $duracion, 'id' => $idc]);
+		
+	}
+
+	public function editarGeneroCancion($genero, $idc){
+		$query = $this->connect()->prepare('UPDATE `canciones` SET `genero`= :genero WHERE id_cancion = :id');
+		$query->execute(['genero' => $genero, 'id' => $idc]);
+		
+	  }
+
+	public function editarNombreCancion($nombre, $idc){
+		$query = $this->connect()->prepare('UPDATE `canciones` SET `nombre`= :cancion WHERE id_cancion = :id');
+		$query->execute(['cancion' => $nombre, 'id' => $idc]);
+		
+	  }
+
 	public function borrarCancion($cancion){
 		$query = $this->connect()->prepare('DELETE FROM `canciones` WHERE id_user = :id AND id_cancion = :idc');
 		$query->execute(['id' => $this->id_user, 'idc' => $cancion]);

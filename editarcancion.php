@@ -9,27 +9,27 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['cancion'])){
+    $user->editarNombreCancion($_POST['cancion'], $_POST['editar']);
+}
+
+if(isset($_POST['genero'])){
+    $user->editarGeneroCancion($_POST['genero'], $_POST['editar']);
+}
+
+if(isset($_POST['duracion'])){
+    $user->editarDuracionCancion($_POST['duracion'], $_POST['editar']);
+}
+
+
+if(isset($_POST['fecha'])){
+    $user->editarFechaCancion($_POST['fecha'], $_POST['editar']);
+}
+
 if(isset($_POST['editar'])){
     $cancion = new Cancion();
     $cancion->setCancion($_POST['editar']);
 }
-
-if(isset($_POST['cancion'])){
-    echo "uwu1";
-}
-
-if(isset($_POST['genero'])){
-    echo "uwu2";
-}
-
-if(isset($_POST['duracion'])){
-    echo "uwu3";
-}
-
-if(isset($_POST['fecha'])){
-    echo "uwu4";
-}
-
 
 
 ?>
