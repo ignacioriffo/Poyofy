@@ -55,6 +55,19 @@ $user = $_SESSION['user'];
       echo "<br>";
       echo "</form>";
     }
+
+    if($user->getIsArtista()){
+      echo "<form action='cancionesartista.php'  method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='cancionesartista'>Canciones</button>";
+      echo "<br>";
+      echo "</form>";
+
+      echo "<form action='albumesartista.php'  method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='albumesartista'>Albumes</button>";
+      echo "<br>";
+      echo "</form>";
+    }
+    
 		?>
     
 	</h6>

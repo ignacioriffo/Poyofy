@@ -14,6 +14,24 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function crearCancion($cancion, $genero, $duracion, $fecha){
+		$query = $this->connect()->prepare('INSERT INTO `canciones`(`id_user`, `nombre`, `genero`, `duracion`, `fecha`) VALUES (:id,:nombre,:genero,:duracion,:fecha)');
+		$query->execute(['id' => $this->id_user, 'nombre' => $cancion, 'genero' => $genero, 'duracion' => $duracion, 'fecha' => $fecha]);
+	}
+
+	public function getCancionesArtista(){
+		$query = $this->connect()->prepare('SELECT id_cancion FROM canciones WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		$canciones = array();
+
+		foreach($query as $currentId){
+			$cancion = new Cancion();
+			$cancion->setCancion($currentId['id_cancion']);
+			array_push($canciones,$cancion);
+		}
+		return $canciones;
+	}
+
 	public function nomegustaCancion($cancionid){
 		$query = $this->connect()->prepare('DELETE FROM `usuarios_canciones` WHERE id_user = :id AND id_cancion = :idc');
 		$query->execute(['id' => $this->id_user, 'idc' => $cancionid]);
