@@ -68,7 +68,7 @@ $canciones = $user->getCancionesArtista();
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
-        echo "<form action='cancionesartista.php'  method='post'>";
+        echo "<form action='editarcancion.php'  method='post'>";
         echo '<td><button type="sumbit" name="editar" value="' . $cancion->getId() . '" class="btn btn-light">Editar</button></td>';
         echo "</form>";
         echo "<form action='cancionesartista.php'  method='post'>";
