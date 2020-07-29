@@ -2,6 +2,7 @@
 
 include_once 'conexion2.php';
 include_once 'playlist.php';
+include_once 'album.php';
 
 
 class User extends DB{
@@ -13,6 +14,19 @@ class User extends DB{
 	private $playlists;
 	private $currPlaylist;
 	private $seguidos;
+
+	public function getAlbumes(){
+		$query = $this->connect()->prepare('SELECT id_album FROM albumes WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		$albumes = array();
+
+		foreach($query as $currentId){
+			$album = new Album();
+			$album->setAlbum($currentId['id_album']);
+			array_push($albumes,$album);
+		}
+		return $albumes;
+	}
 
 	public function editarFechaCancion($fecha, $idc){
 		$query = $this->connect()->prepare('UPDATE `canciones` SET `fecha`= :fecha WHERE id_cancion = :id');
