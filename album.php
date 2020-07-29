@@ -6,6 +6,7 @@ class Album extends DB {
     private $genero;
     private $duracion;
     private $fecha;
+    private $canciones;
 /*
   public function getAlbum(){
     $query = $this->connect()->prepare('SELECT * FROM albumes WHERE id_album = :id');
@@ -17,6 +18,26 @@ class Album extends DB {
     
   }
 */
+
+    public function borrarCancion($cancionid){ //hay q solo modificar campo de albumm a null
+        $query = $this->connect()->prepare('UPDATE `canciones` SET `id_album`= NULL WHERE id_cancion = :idc');
+        $query->execute(['idc' => $cancionid]);
+    }
+
+    public function getCanciones(){
+        $this->canciones = array();
+        $query = $this->connect()->prepare('SELECT * FROM canciones WHERE id_album = :id');
+        $query->execute(['id' => $this->id_album]);
+
+        foreach ($query as $currentCancion){
+            $cancion = new Cancion();
+            $cancion->setCancion($currentCancion['id_cancion']);
+            array_push($this->canciones,$cancion);
+
+        }
+        return $this->canciones;
+    }
+
   public function getCreador(){
     $query = $this->connect()->prepare('SELECT * FROM personas WHERE id_user = :id');
     $query->execute(['id' => $this->id_user]);
@@ -38,6 +59,7 @@ class Album extends DB {
             $this->genero = $currentAlbum['genero'];
             $this->duracion = $currentAlbum['duracion'];
             $this->fecha = $currentAlbum['fecha'];
+            $this->canciones = array();
 		}
     }
     
