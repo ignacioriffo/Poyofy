@@ -18,6 +18,11 @@ class Album extends DB {
     
   }
 */
+	public function añadirCancion($cancionid){
+		$query = $this->connect()->prepare('UPDATE `canciones` SET `id_album`= :id WHERE id_cancion = :idc');
+		$query->execute(['id' => $this->id_album, 'idc' => $cancionid]);
+
+	}
 
     public function borrarCancion($cancionid){ //hay q solo modificar campo de albumm a null
         $query = $this->connect()->prepare('UPDATE `canciones` SET `id_album`= NULL WHERE id_cancion = :idc');

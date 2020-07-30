@@ -15,6 +15,40 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+
+	public function searchSongsArtista($string, $artistaid){
+        $query = $string;
+        $min_length = 1;
+        // you can set minimum length of the query if you want
+		if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
+			$finallist = array();
+            $query = htmlspecialchars($query); 
+            // changes characters used in html to their equivalents, for example: < to &gt;
+            #$q = $this->query($pdo, $str);
+            $q = $this->connect()->prepare("SELECT id_cancion FROM canciones WHERE (nombre LIKE '%".$query."%') AND id_user = :ida");
+            $q->execute(['ida' => $artistaid]);
+
+            $numResults = $q->rowCount();
+            $lista = [];
+            if($numResults > 0){ // if one or more rows are returned do following
+                $cont = 0;
+                while($cont < $numResults){
+                    array_push($lista, $q->fetchColumn(0));
+                    $cont++;
+				}
+			}else{ // if there is no matching rows do following
+                return $lista;
+			}
+			
+			return $lista;
+        }
+        else{ // if query length is less than minimum
+            return [];
+        }
+    }
+
+
+
 	public function getAlbumes(){
 		$query = $this->connect()->prepare('SELECT id_album FROM albumes WHERE id_user = :id');
 		$query->execute(['id' => $this->id_user]);
