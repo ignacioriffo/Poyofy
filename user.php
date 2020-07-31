@@ -15,6 +15,11 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function borrarAlbum($album){
+		$query = $this->connect()->prepare('DELETE FROM `albumes` WHERE id_album = :ida');
+		$query->execute(['ida' => $album]);
+	}
+
 
 	public function searchSongsArtista($string, $artistaid){
         $query = $string;

@@ -10,8 +10,8 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
-if(isset($_POST['borrarlbum'])){
-    $user->borrarAlbum($_POST['borrarlbum']);
+if(isset($_POST['borraralbum'])){
+    $user->borrarAlbum($_POST['borraralbum']);
     //$playlistcreada = "Borrado correctamente!";
 }
 
