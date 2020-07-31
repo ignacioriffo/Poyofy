@@ -8,6 +8,16 @@ class Cancion extends DB {
     private $duracion;
     private $fecha;
 
+  public function getAlbumId(){
+    $query = $this->connect()->prepare('SELECT * FROM albumes WHERE id_album = :id');
+    $query->execute(['id' => $this->id_album]);
+
+    foreach ($query as $currentUser){
+      return $currentUser['id_album'];
+    }
+    
+  }
+
   public function getAlbum(){
     $query = $this->connect()->prepare('SELECT * FROM albumes WHERE id_album = :id');
     $query->execute(['id' => $this->id_album]);

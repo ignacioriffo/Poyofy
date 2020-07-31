@@ -72,6 +72,7 @@ $canciones = $playlist->getCanciones();
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
       <th scope="col">Duración</th>
+      <th scope="col">Album</th>
       <th scope="col"></th>
     </tr>
     </thead>
@@ -84,6 +85,9 @@ $canciones = $playlist->getCanciones();
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
+        echo "<form action='homealbum.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $cancion->getAlbumId() . "'>" . $cancion->getAlbum() . "</button></td>";
+        echo "</form>";
         if(!$user->getIsArtista()){
           echo "<form action='playlistsongs.php'  method='post'>";
           echo '<td><button type="sumbit" name="gustarCancion" value="' . $cancion->getId() . '" class="btn btn-success">Me Gusta</button></td>';

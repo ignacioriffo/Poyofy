@@ -129,7 +129,9 @@ if(!$uservisita->getIsArtista()){
       $index = 0;
       foreach($albumes as $album){
         echo "<tr>";
-        echo "<td>" . $album->getNombre() . "</td>";
+        echo "<form action='homealbum.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $cancion->getAlbumId() . "'>" . $cancion->getAlbum() . "</button></td>";
+        echo "</form>";
         echo "<td>" . $album->getCreador() . "</td>";
         echo "<td>" . $album->getDuracion() . "</td>";
         echo "</tr>";
