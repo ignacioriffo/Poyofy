@@ -9,6 +9,11 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['borrarcuenta'])){
+  $user->borrarCuenta();
+  header('Location: logout.php');
+}
+
 if(isset($_POST['newbiografia'])){
   $user->editarBiografia($_POST['newbiografia']);
 }
@@ -95,6 +100,11 @@ if(isset($_POST['password'])){
         echo '</div>';
         echo '</form>';
       }
+
+
+      echo "<form action='editarperfil.php'  method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='borrarcuenta' value='" . $user->getId() . "'>Borrar cuenta</button>";
+      echo "</form>";
     ?>
 
 

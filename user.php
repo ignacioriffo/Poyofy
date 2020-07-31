@@ -15,6 +15,11 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function borrarCuenta(){
+		$query = $this->connect()->prepare('DELETE FROM `personas` WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+	}
+
 	public function editarDescripcionPlaylist($descripcion, $idp){
 		$query = $this->connect()->prepare('UPDATE `playlists` SET `descripcion`= :descripcion WHERE id_playlist = :id');
 		$query->execute(['descripcion' => $descripcion, 'id' => $idp]);
