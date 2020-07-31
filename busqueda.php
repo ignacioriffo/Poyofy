@@ -102,7 +102,9 @@ if(isset($_POST['busqueda'])){
         $cancion->setCancion($cancionid);
         echo "<tr>";
         echo "<td>" . $cancion->getNombre() . "</td>";
-        echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='seguido' value='" . $cancion->getUser() . "'>" . $cancion->getCreador() . "</button></td>";
+        echo "</form>";
         echo "<td>" . $cancion->getGenero() . "</td>";
         echo "<td>" . $cancion->getFecha() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";

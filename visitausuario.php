@@ -90,7 +90,9 @@ if(!$uservisita->getIsArtista()){
       foreach($canciones as $cancion){
         echo "<tr>";
         echo "<td>" . $cancion->getNombre() . "</td>";
-        echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='seguido' value='" . $cancion->getUser() . "'>" . $cancion->getCreador() . "</button></td>";
+        echo "</form>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
 
         if(!$user->getIsArtista()){
@@ -130,7 +132,7 @@ if(!$uservisita->getIsArtista()){
       foreach($albumes as $album){
         echo "<tr>";
         echo "<form action='homealbum.php'  method='post'>";
-        echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $cancion->getAlbumId() . "'>" . $cancion->getAlbum() . "</button></td>";
+        echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $album->getId() . "'>" . $album->getNombre() . "</button></td>";
         echo "</form>";
         echo "<td>" . $album->getCreador() . "</td>";
         echo "<td>" . $album->getDuracion() . "</td>";
