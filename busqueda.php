@@ -1,6 +1,7 @@
 <?php
 include_once 'user.php';
 include_once 'cancion.php';
+include_once 'album.php';
 session_start();
 
 if(!isset($_SESSION['user'])){
@@ -36,6 +37,7 @@ if(isset($_POST['busqueda'])){
     $canciones = $listabusqueda[0];
     $playlists = $listabusqueda[1];
     $personas = $listabusqueda[2];
+    $albumes = $listabusqueda[3];
 
     $usuarios = array();
     $artistas = array();
@@ -119,6 +121,45 @@ if(isset($_POST['busqueda'])){
     
     </tbody>
     </table>
+
+    <br>
+    
+    <h3>Albumes</h3>
+    
+    <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Artista</th>
+      <th scope="col">Duración</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+      $index = 0;
+      foreach($albumes as $albumid){
+        $album = new Album();
+        $album->setAlbum($albumid);
+        echo "<tr>";
+        echo "<td>" . $album->getNombre() . "</td>";
+        echo "<td>" . $album->getCreador() . "</td>";
+        echo "<td>" . $album->getDuracion() . "</td>";
+        echo "</tr>";
+        if($index == 4){
+          break;
+        }
+        $index++;
+      }
+    ?>
+    
+    </tbody>
+    </table>
+
+
+
+
+
+
     
     <br>
     <h3>Playlists</h3>

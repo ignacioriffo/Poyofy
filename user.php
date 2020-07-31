@@ -247,6 +247,25 @@ class User extends DB{
 			}else{ // if there is no matching rows do following
                 array_push($finallist, []);
 			}
+
+			$str = "SELECT id_album FROM albumes WHERE (nombre LIKE '%".$query."%')";
+            #$q = $this->query($pdo, $str);
+            $q = $this->connect()->prepare($str);
+            $q->execute();
+
+            $numResults = $q->rowCount();
+            $lista = [];
+            if($numResults > 0){ // if one or more rows are returned do following
+                $cont = 0;
+                while($cont < $numResults){
+                    array_push($lista, $q->fetchColumn(0));
+                    $cont++;
+				}
+				array_push($finallist, $lista);
+			}else{ // if there is no matching rows do following
+                array_push($finallist, []);
+			}
+			
 			
 			return $finallist;
         }
