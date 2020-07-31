@@ -10,6 +10,14 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['playlisteditada'])){
+  $user->editarNombrePlaylist($_POST['playlisteditada'], $_POST['playlist']);
+}
+
+if(isset($_POST['descripcion'])){
+  $user->editarDescripcionPlaylist($_POST['descripcion'], $_POST['playlist']);
+}
+
 $playlist = new Playlist();
 if(isset($_POST['playlist'])){
     $playlistid = $_POST['playlist'];
@@ -66,6 +74,38 @@ $canciones = $playlist->getCanciones();
     <p4><?php echo $playlist->getNseguidores() . " Seguidores<br>";?></p4>
     <p4>Descripción: <?php echo $playlist->getDescripcion() . "<br>"; ?></p4>
     <?php
+      echo "<form action='' method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='editar'>Editar</button>";
+      echo '<input type="hidden" name="playlist" value="' . $playlistid . '">';
+      echo "</form>";
+
+      if(isset($_POST['editar'])){
+        echo "<br>";
+        echo'<form action="" method="POST">';
+        echo'<div class="form-group">';
+        echo'<label for="exampleInputEmail1">Nombre Playlist</label>';
+        echo'<br>';
+        echo'<input type="text" class="form-control" name="playlisteditada" id="playlisteditada" aria-describedby="emailHelp" placeholder="Ingrese Nombre">';
+        echo '<input type="hidden" name="playlist" value="' . $playlistid . '">';
+        echo '<input type="hidden" name="editar">';
+        echo'</div>';
+        echo'<button type="submit" class="btn btn-primary">Enviar</button>';
+        echo'</form>';
+        echo'<br>';
+
+        echo'<form action="" method="POST">';
+        echo'<div class="form-group">';
+        echo'<label for="exampleInputEmail1">Descripcion</label>';
+        echo'<br>';
+        echo'<input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="emailHelp" placeholder="Ingrese Descripcion">';
+        echo '<input type="hidden" name="playlist" value="' . $playlistid . '">';
+        echo '<input type="hidden" name="editar">';
+        echo'</div>';
+        echo'<button type="submit" class="btn btn-primary">Enviar</button>';
+        echo'</form>';
+        echo'<br>';
+      }
+
       echo "<form action='playlistcreadas.php'>";
       echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
       echo "</form>";

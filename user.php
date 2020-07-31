@@ -15,6 +15,18 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function editarDescripcionPlaylist($descripcion, $idp){
+		$query = $this->connect()->prepare('UPDATE `playlists` SET `descripcion`= :descripcion WHERE id_playlist = :id');
+		$query->execute(['descripcion' => $descripcion, 'id' => $idp]);
+		
+	}
+
+	public function editarNombrePlaylist($nombre, $idp){
+		$query = $this->connect()->prepare('UPDATE `playlists` SET `nombre`= :playlist WHERE id_playlist = :id');
+		$query->execute(['playlist' => $nombre, 'id' => $idp]);
+		
+	}
+
 	public function editarFechaAlbum($fecha, $ida){
 		$query = $this->connect()->prepare('UPDATE `albumes` SET `fecha`= :fecha WHERE id_album = :id');
 		$query->execute(['fecha' => $fecha, 'id' => $ida]);
