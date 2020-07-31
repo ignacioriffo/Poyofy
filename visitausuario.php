@@ -1,6 +1,7 @@
 <?php
 include_once "user.php";
 include_once "playlist.php";
+include_once 'album.php';
 session_start();
 
 if(!isset($_SESSION['user'])){
@@ -27,7 +28,14 @@ if(isset($_POST['seguido'])){
 }
 
 $playlists = $uservisita->getPlaylists();
-$canciones = $uservisita->getCanciones();
+if(!$uservisita->getIsArtista()){
+  $canciones = $uservisita->getCanciones();
+  $albumes = array();
+}else{
+  $canciones = $uservisita->getCancionesArtista();
+  $albumes = $uservisita->getAlbumesArtista();
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -103,10 +111,39 @@ $canciones = $uservisita->getCanciones();
     
     </tbody>
     </table>
-    
 
-    </tbody>
-    </table>
+    <?php
+    if($uservisita->getIsArtista()){
+    echo '<h3>Albumes</h3>';
+    
+    echo '<table class="table">';
+    echo '<thead>';
+    echo '<tr>';
+    echo '<th scope="col">Nombre</th>';
+    echo '<th scope="col">Artista</th>';
+    echo '<th scope="col">Duración</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+    
+      $index = 0;
+      foreach($albumes as $album){
+        echo "<tr>";
+        echo "<td>" . $album->getNombre() . "</td>";
+        echo "<td>" . $album->getCreador() . "</td>";
+        echo "<td>" . $album->getDuracion() . "</td>";
+        echo "</tr>";
+        if($index == 4){
+          break;
+        }
+        $index++;
+      }
+    
+    
+    echo '</tbody>';
+    echo '</table>';
+    }
+    ?>
     
     <h3>Playlists</h3>
     <table class="table">

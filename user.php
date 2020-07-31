@@ -15,6 +15,19 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function getAlbumesArtista(){
+		$query = $this->connect()->prepare('SELECT id_album FROM albumes WHERE id_user = :id');
+		$query->execute(['id' => $this->id_user]);
+		$albumes = array();
+
+		foreach($query as $currentId){
+			$album = new Album();
+			$album->setAlbum($currentId['id_album']);
+			array_push($albumes,$album);
+		}
+		return $albumes;
+	}
+
 	public function crearAlbum($album, $genero, $fecha){
 		$duracion = "00:00:00";
 		$query = $this->connect()->prepare('INSERT INTO `albumes`(`id_user`, `nombre`, `genero`, `duracion`, `fecha`) VALUES (:id,:nombre,:genero,:duracion,:fecha)');
