@@ -88,6 +88,8 @@ if(isset($_POST['busqueda'])){
     <tr>
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
+      <th scope="col">Genero</th>
+      <th scope="col">Fecha</th>
       <th scope="col">Duración</th>
       <th scope="col"></th>
     </tr>
@@ -101,6 +103,8 @@ if(isset($_POST['busqueda'])){
         echo "<tr>";
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<td>" . $cancion->getGenero() . "</td>";
+        echo "<td>" . $cancion->getFecha() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
 
         if(!$user->getIsArtista()){
@@ -131,6 +135,8 @@ if(isset($_POST['busqueda'])){
     <tr>
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
+      <th scope="col">Genero</th>
+      <th scope="col">Fecha</th>
       <th scope="col">Duración</th>
     </tr>
     </thead>
@@ -141,8 +147,12 @@ if(isset($_POST['busqueda'])){
         $album = new Album();
         $album->setAlbum($albumid);
         echo "<tr>";
-        echo "<td>" . $album->getNombre() . "</td>";
+        echo "<form action='homealbum.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $albumid . "'>" . $album->getNombre() . "</button></td>";
+        echo "</form>";
         echo "<td>" . $album->getCreador() . "</td>";
+        echo "<td>" . $album->getGenero() . "</td>";
+        echo "<td>" . $album->getFecha() . "</td>";
         echo "<td>" . $album->getDuracion() . "</td>";
         echo "</tr>";
         if($index == 4){

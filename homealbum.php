@@ -1,20 +1,29 @@
 <?php
 include_once 'user.php';
+include_once 'album.php';
 session_start();
 
 if(!isset($_SESSION['user'])){
   header('Location: login.php');
 }
 
+if(!isset($_POST['homealbum'])){
+    header('Location: home.php');
+}else{
+    $album = new Album();
+    $albumid = $_POST['homealbum'];
+    $album->setAlbum($albumid);
+}
+
 $user = new User();
 $user = $_SESSION['user'];
 
-if(isset($_POST['nomegusta'])){
-  $cancionid = $_POST['nomegusta'];
-  $user->nomegustaCancion($cancionid);
+if(isset($_POST['gustarCancion'])){
+    $cancionagregada = $_POST['gustarCancion'];
+    $user->megustaCancion($cancionagregada);
 }
 
-$canciones = $user->getCanciones();
+$canciones = $album->getCanciones();
 
 ?>
 <!doctype html>
@@ -30,27 +39,28 @@ $canciones = $user->getCanciones();
     <title>Hello, world!</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="nav-link" href="home.php"><?php echo $user->getNombre(); ?></a>
-    <a class="nav-link" href="homecanciones.php">Canciones</a>
-    <a class="nav-link" href="homeplaylist.php">Playlist</a>
-    <a class="nav-link" href="logout.php">Cerrar sesión</a>
-    <form class="form-inline" action='busqueda.php' method='post'>
+  <nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="nav-link" href="home.php"><?php echo $user->getNombre(); ?></a>
+  <a class="nav-link" href="homecanciones.php">Canciones</a>
+	<a class="nav-link" href="homeplaylist.php">Playlist</a>
+	<a class="nav-link" href="logout.php">Cerrar sesión</a>
+  <form class="form-inline" action='busqueda.php' method='post'>
     <input class="form-control mr-sm-2" type="search" placeholder="Ingrese busqueda" aria-label="Search"  name='busqueda'>
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
-    </nav>
-    <div class="container">
-    <h3>Canciones</h3>
-    
+  </form>
+  </nav>
+  <div class="container">
+    <h3><?php echo $album->getNombre(); ?></h3>
+    <p6>Creado por  <?php echo $album->getCreador() . "<br>"; ?></p6>
+    <p6><?php echo $album->getGenero() . "<br>"; ?></p6>
+    <p6><?php echo $album->getFecha() . "<br>"; ?></p6>
+    <br>
     <table class="table">
     <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nombre</th>
       <th scope="col">Artista</th>
-      <th scope="col">Genero</th>
-      <th scope="col">Fecha</th>
       <th scope="col">Duración</th>
       <th scope="col"></th>
     </tr>
@@ -63,12 +73,15 @@ $canciones = $user->getCanciones();
         echo "<th scope='row'>" . $nsong . "</th>";
         echo "<td>" . $cancion->getNombre() . "</td>";
         echo "<td>" . $cancion->getCreador() . "</td>";
-        echo "<td>" . $cancion->getGenero() . "</td>";
-        echo "<td>" . $cancion->getFecha() . "</td>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
-        echo "<form action='homecanciones.php'  method='post'>";
-        echo '<td><button type="sumbit" name="nomegusta" value="' . $cancion->getId() . '" class="btn btn-light">Borrar</button></td>';
-        echo "</form>";
+        if(!$user->getIsArtista()){
+            echo "<form action='homealbum.php'  method='post'>";
+            echo '<td><button type="sumbit" name="gustarCancion" value="' . $cancion->getId() . '" class="btn btn-success">Me Gusta</button></td>';
+            echo '<input type="hidden" name="homealbum" value="' . $albumid . '">';
+            echo "</form>";
+          }else{
+            echo "<td></td>";
+          }
         echo "</tr>";
         $nsong++;
       }
@@ -76,7 +89,6 @@ $canciones = $user->getCanciones();
     </tbody>
     </table>
     </div>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
