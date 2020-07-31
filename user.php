@@ -15,6 +15,24 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function editarFechaAlbum($fecha, $ida){
+		$query = $this->connect()->prepare('UPDATE `albumes` SET `fecha`= :fecha WHERE id_album = :id');
+		$query->execute(['fecha' => $fecha, 'id' => $ida]);
+		
+	}
+
+	public function editarGeneroAlbum($genero, $ida){
+		$query = $this->connect()->prepare('UPDATE `albumes` SET `genero`= :genero WHERE id_album = :id');
+		$query->execute(['genero' => $genero, 'id' => $ida]);
+		
+	}
+
+	public function editarNombreAlbum($nombre, $ida){
+		$query = $this->connect()->prepare('UPDATE `albumes` SET `nombre`= :album WHERE id_album = :id');
+		$query->execute(['album' => $nombre, 'id' => $ida]);
+		
+	}
+
 	public function getAlbumesArtista(){
 		$query = $this->connect()->prepare('SELECT id_album FROM albumes WHERE id_user = :id');
 		$query->execute(['id' => $this->id_user]);

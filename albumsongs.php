@@ -10,6 +10,18 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['albumeditado'])){
+  $user->editarNombreAlbum($_POST['albumeditado'], $_POST['album']);
+}
+
+if(isset($_POST['genero'])){
+  $user->editarGeneroAlbum($_POST['genero'], $_POST['album']);
+}
+
+if(isset($_POST['fecha'])){
+  $user->editarFechaAlbum($_POST['fecha'], $_POST['album']);
+}
+
 $album = new Album();
 if(isset($_POST['album'])){
     $albumid = $_POST['album'];
@@ -59,8 +71,59 @@ $canciones = $album->getCanciones();
     <div class="container">
     <h3><?php echo $album->getNombre(); ?></h3>
     <p6>Creado por  <?php echo $album->getCreador() . "<br>"; ?></p6>
+    <p6><?php echo $album->getGenero() . "<br>"; ?></p6>
+    <p6><?php echo $album->getFecha() . "<br>"; ?></p6>
 
     <?php
+    echo "<form action='' method='post'>";
+    echo "<button type='submit' class='btn btn-link' name='editar'>Editar</button>";
+    echo '<input type="hidden" name="album" value="' . $albumid . '">';
+    echo "</form>";
+
+    if(isset($_POST['editar'])){
+      echo "<br>";
+      echo'<form action="" method="POST">';
+      echo'<div class="form-group">';
+      echo'<label for="exampleInputEmail1">Nombre Album</label>';
+      echo'<br>';
+      echo'<input type="text" class="form-control" name="albumeditado" id="albumeditado" aria-describedby="emailHelp" placeholder="Ingrese Nombre">';
+      echo '<input type="hidden" name="album" value="' . $albumid . '">';
+      echo '<input type="hidden" name="editar">';
+      echo'</div>';
+      echo'<button type="submit" class="btn btn-primary">Enviar</button>';
+      echo'</form>';
+      echo'<br>';
+
+      echo'<form action="" method="POST">';
+      echo'<div class="form-group">';
+      echo'<label for="exampleInputEmail1">Genero</label>';
+      echo'<br>';
+      echo'<input type="text" class="form-control" name="genero" id="genero" aria-describedby="emailHelp" placeholder="Ingrese Genero">';
+      echo '<input type="hidden" name="album" value="' . $albumid . '">';
+      echo '<input type="hidden" name="editar">';
+      echo'</div>';
+      echo'<button type="submit" class="btn btn-primary">Enviar</button>';
+      echo'</form>';
+      echo'<br>';
+
+      echo'<form action="" method="POST">';
+      echo'<div class="form-group">';
+      echo'<label for="exampleInputEmail1">Fecha</label>';
+      echo'<br>';
+      echo'<input type="text" class="form-control" name="fecha" id="fecha" aria-describedby="emailHelp" placeholder="Ingrese Fecha">';
+      echo '<input type="hidden" name="album" value="' . $albumid . '">';
+      echo '<input type="hidden" name="editar">';
+      echo'</div>';
+      echo'<button type="submit" class="btn btn-primary">Enviar</button>';
+      echo'</form>';
+      echo'<br>';
+
+      echo "<br>";
+    }
+
+    echo "<form action='albumesartista.php'>";
+    echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
+    echo "</form>";
 
     echo '<form class="form-inline" action="albumsongs.php" method="post">';
     echo '<input class="form-control mr-sm-2" type="search" placeholder="Ingrese cancion" aria-label="Search"  name="busqueda">';
