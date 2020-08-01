@@ -4,7 +4,6 @@ class Album extends DB {
     private $id_user;
     private $nombre;
     private $genero;
-    private $duracion;
     private $fecha;
     private $canciones;
 /*
@@ -62,7 +61,6 @@ class Album extends DB {
 			$this->id_album = $currentAlbum['id_album'];
 			$this->nombre = $currentAlbum['nombre'];
             $this->genero = $currentAlbum['genero'];
-            $this->duracion = $currentAlbum['duracion'];
             $this->fecha = $currentAlbum['fecha'];
             $this->canciones = array();
 		}
@@ -82,10 +80,6 @@ class Album extends DB {
     
     public function getGenero(){
 		return $this->genero;
-    }
-
-    public function getDuracion(){
-		return $this->duracion;
     }
 
     public function getFecha(){

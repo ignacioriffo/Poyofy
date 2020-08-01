@@ -64,9 +64,8 @@ class User extends DB{
 	}
 
 	public function crearAlbum($album, $genero, $fecha){
-		$duracion = "00:00:00";
-		$query = $this->connect()->prepare('INSERT INTO `albumes`(`id_user`, `nombre`, `genero`, `duracion`, `fecha`) VALUES (:id,:nombre,:genero,:duracion,:fecha)');
-		$query->execute(['id' => $this->id_user, 'nombre' => $album, 'genero' => $genero, 'duracion' => $duracion, 'fecha' => $fecha]);
+		$query = $this->connect()->prepare('INSERT INTO `albumes`(`id_user`, `nombre`, `genero`, `fecha`) VALUES (:id,:nombre,:genero,:fecha)');
+		$query->execute(['id' => $this->id_user, 'nombre' => $album, 'genero' => $genero, 'fecha' => $fecha]);
 	}
 
 	public function borrarAlbum($album){

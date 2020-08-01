@@ -53,7 +53,7 @@ $canciones = $user->getCancionesArtista();
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nombre</th>
-      <th scope="col">Artista</th>
+      <th scope="col">Album</th>
       <th scope="col">Duración</th>
       <th scope="col"></th>
       <th scope="col"></th>
@@ -66,7 +66,9 @@ $canciones = $user->getCancionesArtista();
         echo "<tr>";
         echo "<th scope='row'>" . $nsong . "</th>";
         echo "<td>" . $cancion->getNombre() . "</td>";
-        echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<form action='homealbum.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $cancion->getAlbumId() . "'>" . $cancion->getAlbum() . "</button></td>";
+        echo "</form>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
         echo "<form action='editarcancion.php'  method='post'>";
         echo '<td><button type="sumbit" name="editar" value="' . $cancion->getId() . '" class="btn btn-light">Editar</button></td>';

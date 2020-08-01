@@ -123,7 +123,6 @@ if(!$uservisita->getIsArtista()){
     echo '<tr>';
     echo '<th scope="col">Nombre</th>';
     echo '<th scope="col">Artista</th>';
-    echo '<th scope="col">Duración</th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
@@ -135,7 +134,6 @@ if(!$uservisita->getIsArtista()){
         echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $album->getId() . "'>" . $album->getNombre() . "</button></td>";
         echo "</form>";
         echo "<td>" . $album->getCreador() . "</td>";
-        echo "<td>" . $album->getDuracion() . "</td>";
         echo "</tr>";
         if($index == 4){
           break;

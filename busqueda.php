@@ -139,7 +139,6 @@ if(isset($_POST['busqueda'])){
       <th scope="col">Artista</th>
       <th scope="col">Genero</th>
       <th scope="col">Fecha</th>
-      <th scope="col">Duración</th>
     </tr>
     </thead>
     <tbody>
@@ -155,7 +154,6 @@ if(isset($_POST['busqueda'])){
         echo "<td>" . $album->getCreador() . "</td>";
         echo "<td>" . $album->getGenero() . "</td>";
         echo "<td>" . $album->getFecha() . "</td>";
-        echo "<td>" . $album->getDuracion() . "</td>";
         echo "</tr>";
         if($index == 4){
           break;
