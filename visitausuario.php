@@ -11,6 +11,16 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['dejarseguir'])){
+  $user->dejarSeguirUsuario($_POST['dejarseguir']);
+  //$playlistcreada = "Borrado correctamente!";
+}
+
+if(isset($_POST['seguir'])){
+  $usuarioagregado = $_POST['seguir'];
+  $user->seguirUsuario($usuarioagregado);
+}
+
 if(isset($_POST['gustarCancion'])){
   $cancionagregada = $_POST['gustarCancion'];
   $user->megustaCancion($cancionagregada);
@@ -35,7 +45,6 @@ if(!$uservisita->getIsArtista()){
   $canciones = $uservisita->getCancionesArtista();
   $albumes = $uservisita->getAlbumesArtista();
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -65,13 +74,19 @@ if(!$uservisita->getIsArtista()){
     <p6><?php echo $uservisita->getSeguidores() . " "; ?>Seguidores</p6>
 
     <?php
-    echo "<form action='userseguidos.php'  method='post'>";
-    echo "<button type='submit' class='btn btn-link' name='dejarseguir' value='" . $uservisita->getId() . "'>Dejar de seguir</button>";
-    echo "</form>";
+    if($user->seguidoExists($idseguido)){
+      echo "<form action='visitausuario.php'  method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='dejarseguir' value='" . $uservisita->getId() . "'>Dejar de seguir</button>";
+      echo '<input type="hidden" name="seguido" value="' . $uservisita->getId() . '">';
+      echo "</form>";
+    }else{
+      echo "<form action='visitausuario.php'  method='post'>";
+      echo "<button type='submit' class='btn btn-link' name='seguir' value='" . $uservisita->getId() . "'>Seguir</button>";
+      echo '<input type="hidden" name="seguido" value="' . $uservisita->getId() . '">';
+      echo "</form>";
+    }
     ?>
-    <form action='userseguidos.php'>
-    <button type='submit' class='btn btn-link' name='volver'>Volver</button>
-    </form>
+
     <br>
     <h3>Canciones</h3>
 

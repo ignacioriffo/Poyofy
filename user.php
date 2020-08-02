@@ -15,6 +15,18 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function seguidoExists($idpersona){
+		$query = $this->connect()->prepare('SELECT * FROM personas_personas WHERE id_user = :id AND id_seguidor = :ids');
+		$query->execute(['id' => $idpersona, 'ids' => $this->id_user]);
+
+		if($query->rowCount()){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
 	public function borrarCuenta(){
 		$query = $this->connect()->prepare('DELETE FROM `personas` WHERE id_user = :id');
 		$query->execute(['id' => $this->id_user]);
@@ -277,7 +289,8 @@ class User extends DB{
                 array_push($finallist, []);
 			}
 			
-			$str = "SELECT id_user FROM personas WHERE (username LIKE '%".$query."%')";
+			$personas = array();
+			$str = "SELECT id_user FROM vistausuarios WHERE (username LIKE '%".$query."%')";
             #$q = $this->query($pdo, $str);
             $q = $this->connect()->prepare($str);
             $q->execute();
@@ -287,13 +300,36 @@ class User extends DB{
             if($numResults > 0){ // if one or more rows are returned do following
                 $cont = 0;
                 while($cont < $numResults){
-                    array_push($lista, $q->fetchColumn(0));
+					$persona = new User();
+					$persona->setUser("", $q->fetchColumn(0));
+                    array_push($lista, $persona);
                     $cont++;
 				}
-				array_push($finallist, $lista);
+				array_push($personas, $lista);
 			}else{ // if there is no matching rows do following
-                array_push($finallist, []);
+                array_push($personas, []);
 			}
+
+			$str = "SELECT id_user FROM vistaartistas WHERE (username LIKE '%".$query."%')";
+            #$q = $this->query($pdo, $str);
+            $q = $this->connect()->prepare($str);
+            $q->execute();
+
+            $numResults = $q->rowCount();
+            $lista = [];
+            if($numResults > 0){ // if one or more rows are returned do following
+                $cont = 0;
+                while($cont < $numResults){
+					$persona = new User();
+					$persona->setUser("", $q->fetchColumn(0));
+                    array_push($lista, $persona);
+                    $cont++;
+				}
+				array_push($personas, $lista);
+			}else{ // if there is no matching rows do following
+                array_push($personas, []);
+			}
+			array_push($finallist, $personas);
 
 			$str = "SELECT id_album FROM albumes WHERE (nombre LIKE '%".$query."%')";
             #$q = $this->query($pdo, $str);

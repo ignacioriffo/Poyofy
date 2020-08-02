@@ -36,22 +36,9 @@ if(isset($_POST['busqueda'])){
     $listabusqueda = $user->searchSongs($busqueda);
     $canciones = $listabusqueda[0];
     $playlists = $listabusqueda[1];
-    $personas = $listabusqueda[2];
+    $usuarios = $listabusqueda[2][0];
+    $artistas = $listabusqueda[2][1];
     $albumes = $listabusqueda[3];
-
-    $usuarios = array();
-    $artistas = array();
-
-    foreach($personas as $personaid){
-      $persona = new User();
-      $persona->setUser("", $personaid);
-
-      if($persona->getIsArtista()){
-        array_push($artistas,$persona);
-      }else{
-        array_push($usuarios,$persona);
-      }
-    }
 
 }
 
