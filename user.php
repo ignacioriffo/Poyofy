@@ -386,27 +386,13 @@ class User extends DB{
 	}
 
 	public function insertUser($username, $pass, $type){
-		$query = $this->connect()->prepare('INSERT INTO `personas`(`username`, `password`) VALUES (:user,:pass)');
-		$query->execute(['user' => $username, 'pass' => $pass]);
-
 		if($type == "usuario"){
-			$datos = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user AND password = :pass');
-			$datos->execute(['user' => $username, 'pass' => $pass]);
-			foreach($datos as $newUser){
-				$id = $newUser['id_user'];
-				$query = $this->connect()->prepare('INSERT INTO `usuarios`(`id_user`) VALUES (:id)');
-				$query->execute(['id' => $id]);
-			}
+			$tipo = 0;
 		}else{
-			$datos = $this->connect()->prepare('SELECT * FROM  personas WHERE username = :user AND password = :pass');
-			$datos->execute(['user' => $username, 'pass' => $pass]);
-			foreach($datos as $newUser){
-				$biografia = "";
-				$id = $newUser['id_user'];
-				$query = $this->connect()->prepare('INSERT INTO `artistas`(`id_user`, `biografia`) VALUES (:id,:biografia)');
-				$query->execute(['id' => $id, 'biografia'=> $biografia]);
-			}
+			$tipo = 1;
 		}
+		$query = $this->connect()->prepare('INSERT INTO `personas`(`username`, `password`, `tipo`) VALUES (:user,:pass,:tipo)');
+		$query->execute(['user' => $username, 'pass' => $pass, 'tipo' => $tipo]);
 	}
 
 	public function setCurrPlaylist($playlist){
