@@ -238,7 +238,9 @@ if(isset($_POST['busqueda'])){
       $index = 0;
       foreach($usuarios as $usuario){
         echo "<tr>";
-        echo "<td>" . $usuario->getNombre() . "</td>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='seguido' value='" . $usuario->getId() . "'>" . $usuario->getNombre() . "</button></td>";
+        echo "</form>";
         echo "<form action='busqueda.php'  method='post'>";
         echo '<td><button type="sumbit" name="seguirUsuario" value="' . $usuario->getId() . '" class="btn btn-success">Seguir</button></td>';
         echo '<input type="hidden" name="busqueda" value="' . $busqueda . '">';
