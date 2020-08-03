@@ -114,6 +114,9 @@ class Playlist extends DB{
 		return $this->descripcion;
 	}
 
+	public function getUser(){
+		return $this->id_user;
+    }
 }
 
 ?>

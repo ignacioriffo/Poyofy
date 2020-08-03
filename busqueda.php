@@ -138,7 +138,9 @@ if(isset($_POST['busqueda'])){
         echo "<form action='homealbum.php'  method='post'>";
         echo "<td><button type='submit' class='btn btn-link' name='homealbum' value='" . $albumid . "'>" . $album->getNombre() . "</button></td>";
         echo "</form>";
-        echo "<td>" . $album->getCreador() . "</td>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='seguido' value='" . $album->getUser() . "'>" . $album->getCreador() . "</button></td>";
+        echo "</form>";
         echo "<td>" . $album->getGenero() . "</td>";
         echo "<td>" . $album->getFecha() . "</td>";
         echo "</tr>";
@@ -175,8 +177,12 @@ if(isset($_POST['busqueda'])){
         $playlist = new Playlist();
         $playlist->setPlaylist($playlistid);
         echo "<tr>";
-        echo "<td>" . $playlist->getNombre() . "</td>";
-        echo "<td>" . $playlist->getCreador() . "</td>";
+        echo "<form action='playlistsongs.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='playlist' value='" . $playlist->getId() . "'>" . $playlist->getNombre() . "</button></td>";
+        echo "</form>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='seguido' value='" . $playlist->getUser() . "'>" . $playlist->getCreador() . "</button></td>";
+        echo "</form>";
         echo "<form action='busqueda.php'  method='post'>";
         echo '<td><button type="sumbit" name="seguirPlaylist" value="' . $playlist->getId() . '" class="btn btn-success">Seguir</button></td>';
         echo '<input type="hidden" name="busqueda" value="' . $busqueda . '">';
