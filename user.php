@@ -15,6 +15,18 @@ class User extends DB{
 	private $currPlaylist;
 	private $seguidos;
 
+	public function playlistExists($idplaylist){
+		$query = $this->connect()->prepare('SELECT * FROM personas_playlists WHERE id_user = :id AND id_playlist = :idp');
+		$query->execute(['id' => $this->id_user, 'idp' => $idplaylist]);
+
+		if($query->rowCount()){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
 	public function seguidoExists($idpersona){
 		$query = $this->connect()->prepare('SELECT * FROM personas_personas WHERE id_user = :id AND id_seguidor = :ids');
 		$query->execute(['id' => $idpersona, 'ids' => $this->id_user]);

@@ -10,6 +10,15 @@ if(!isset($_SESSION['user'])){
 $user = new User();
 $user = $_SESSION['user'];
 
+if(isset($_POST['dejarseguir'])){
+  $user->dejarSeguirPlaylist($_POST['dejarseguir']);
+  //$playlistcreada = "Borrado correctamente!";
+}
+
+if(isset($_POST['seguir'])){
+  $user->SeguirPlaylist($_POST['seguir']);
+}
+
 if(isset($_POST['gustarCancion'])){
   $cancionagregada = $_POST['gustarCancion'];
   $user->megustaCancion($cancionagregada);
@@ -56,13 +65,18 @@ $canciones = $playlist->getCanciones();
     <p4>Descripción: <?php echo $playlist->getDescripcion() . "<br>"; ?></p4>
 
     <?php
-      echo "<form action='homeplaylist.php'  method='post'>";
-      echo "<button type='submit' class='btn btn-link' name='dejarseguir' value='" . $playlist->getId() . "'>Dejar de seguir</button>";
-      echo "</form>";
+      if($user->playlistExists($playlistid)){
+        echo "<form action='playlistsongs.php'  method='post'>";
+        echo "<button type='submit' class='btn btn-link' name='dejarseguir' value='" . $playlist->getId() . "'>Dejar de seguir</button>";
+        echo '<input type="hidden" name="playlist" value="' . $playlist->getId() . '">';
+        echo "</form>";
+      }else{
+        echo "<form action='playlistsongs.php'  method='post'>";
+        echo "<button type='submit' class='btn btn-link' name='seguir' value='" . $playlist->getId() . "'>Seguir</button>";
+        echo '<input type="hidden" name="playlist" value="' . $playlist->getId() . '">';
+        echo "</form>";
+      }
     
-      echo "<form action='homeplaylist.php'>";
-      echo "<button type='submit' class='btn btn-link' name='volver'>Volver</button>";
-      echo "</form>";
     ?>
 
     <table class="table">
