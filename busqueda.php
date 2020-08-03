@@ -206,7 +206,9 @@ if(isset($_POST['busqueda'])){
       $index = 0;
       foreach($artistas as $artista){
         echo "<tr>";
-        echo "<td>" . $artista->getNombre() . "</td>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='seguido' value='" . $artista->getId() . "'>" . $artista->getNombre() . "</button></td>";
+        echo "</form>";
         echo "<form action='busqueda.php'  method='post'>";
         echo '<td><button type="sumbit" name="seguirUsuario" value="' . $artista->getId() . '" class="btn btn-success">Seguir</button></td>';
         echo '<input type="hidden" name="busqueda" value="' . $busqueda . '">';
