@@ -72,7 +72,9 @@ $canciones = $album->getCanciones();
         echo "<tr>";
         echo "<th scope='row'>" . $nsong . "</th>";
         echo "<td>" . $cancion->getNombre() . "</td>";
-        echo "<td>" . $cancion->getCreador() . "</td>";
+        echo "<form action='visitausuario.php'  method='post'>";
+        echo "<td><button type='submit' class='btn btn-link' name='seguido' value='" . $cancion->getUser() . "'>" . $cancion->getCreador() . "</button></td>";
+        echo "</form>";
         echo "<td>" . $cancion->getDuracion() . "</td>";
         if(!$user->getIsArtista()){
             echo "<form action='homealbum.php'  method='post'>";
